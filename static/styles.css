@@ -1,0 +1,11 @@
+#page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#show-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

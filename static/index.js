@@ -1,16 +1,7 @@
 const MIN_RATING = 1;
 const MAX_RATING = 10;
 
-let reviewList = [
-  {
-    text: 'Saul Goodman!',
-    rating: 10
-  },
-  {
-    text: 'Justice for Chuck!',
-    rating: 1
-  }
-];
+let reviewList = [];
 
 const render = () => {
   const ul = document.createElement('ul');
@@ -26,7 +17,7 @@ const render = () => {
   reviews.innerHTML = '';
   reviews.appendChild(ul);
 
-  const avgRating = sum/reviewList.length;
+  const avgRatingString = reviewList.length ? (sum/reviewList.length).toString() + '/' + MAX_RATING.toString() : 'N/A';
 
   const showAvgRatingElement = document.getElementById('show-avg-rating');
   if(showAvgRatingElement) {
@@ -37,7 +28,7 @@ const render = () => {
   const newShowAvgRatingElementDiv = document.createElement('div');
   newShowAvgRatingElementDiv.id = 'show-avg-rating';
   const newShowAvgRatingElementSpan = document.createElement('span');
-  newShowAvgRatingElementSpan.textContent = avgRating.toString() + '/' + MAX_RATING.toString();
+  newShowAvgRatingElementSpan.textContent = avgRatingString;
   newShowAvgRatingElementDiv.appendChild(newShowAvgRatingElementSpan);
 
   document.getElementById('show-content').appendChild(newShowAvgRatingElementDiv);
@@ -81,7 +72,22 @@ const onSubmit = () => {
   }
 
   reviewList.push(newReview);
+  saveToLocalStorage();
   render();
 }
 
+const LOCAL_STORAGE_ITEM_KEY = 'reviews';
+
+const loadFromLocalStorage = () => {
+  const reviewsString = localStorage.getItem(LOCAL_STORAGE_ITEM_KEY);
+  const reviewsObj = JSON.parse(reviewsString);
+
+  return reviewsObj ?? [];
+}
+
+const saveToLocalStorage = () => {
+  localStorage.setItem(LOCAL_STORAGE_ITEM_KEY, JSON.stringify(reviewList));
+}
+
+reviewList = loadFromLocalStorage();
 render();

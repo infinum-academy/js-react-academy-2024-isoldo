@@ -1,3 +1,6 @@
+const MIN_RATING = 1;
+const MAX_RATING = 10;
+
 let reviewList = [
   {
     text: 'Saul Goodman!',
@@ -42,7 +45,25 @@ const createReview = (r) => {
 }
 
 const stringifyRating = (rating) => {
-  return rating.toString() + '/10';
+  return rating.toString() + '/' + MAX_RATING.toString();
+}
+
+const onSubmit = () => {
+  const reviewTextElement = document.getElementById('review-box');
+  const reviewRatingElement = document.getElementById('rating');
+
+  const newReview = {
+    text: reviewTextElement.value,
+    rating: Number(reviewRatingElement.value)
+  }
+
+  if(!newReview.text || newReview.rating < MIN_RATING || newReview.rating > MAX_RATING) {
+    console.error('Invalid input', {newReview});
+    return;
+  }
+
+  reviewList.push(newReview);
+  render();
 }
 
 render();

@@ -19,21 +19,21 @@
           </div>
         </div>
         <div id="user-content">
-          <div class="leave-review">
+          <div id="leave-review">
             <div class="review-box-label">
               <label for="review-box">How did you find the show?</label>
             </div>
             <div class="review-box-textarea">
-              <textarea id="review-box" name="review-box">I found the show...</textarea>
+              <textarea id="review-box" name="review-box" placeholder="I found the show..."></textarea>
             </div>
             <div class="rating-box-label">
-              <label for="review-box">How would you rate the show on a scale from 1 to 10?</label>
+              <label for="rating-box-label">How would you rate the show on a scale from 1 to 10?</label>
             </div>
             <div class="rating-box-input">
               <input id="rating" placeholder="10"/>
             </div>
             <div class="submit-review">
-              <button id="submit">Post</button>
+              <button id="submit" onclick="onSubmit()">Post</button>
             </div>
           </div>
           <div id="reviews">

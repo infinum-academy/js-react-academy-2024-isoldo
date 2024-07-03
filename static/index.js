@@ -40,6 +40,8 @@ const createReview = (r) => {
   const reviewTextSpan = document.createElement('span');
   const reviewRatingDiv = document.createElement('div');
   const reviewRatingSpan = document.createElement('span');
+  const reviewDeleteDiv = document.createElement('div');
+  const reviewDeleteButton = document.createElement('button');
 
   reviewTextSpan.textContent = r.text;
   reviewTextDiv.appendChild(reviewTextSpan);
@@ -47,10 +49,21 @@ const createReview = (r) => {
   reviewRatingSpan.textContent = stringifyRating(r.rating);
   reviewRatingDiv.appendChild(reviewRatingSpan);
 
+  reviewDeleteButton.textContent = 'Remove';
+  reviewDeleteButton.onclick = () => removeReview(r);
+  reviewDeleteDiv.appendChild(reviewDeleteButton);
+
   reviewListItem.appendChild(reviewTextDiv);
   reviewListItem.appendChild(reviewRatingDiv);
+  reviewListItem.appendChild(reviewDeleteDiv);
 
   return reviewListItem;
+}
+
+const removeReview = (r) => {
+  reviewList = reviewList.filter((item) => r !== item);
+  saveToLocalStorage();
+  render();
 }
 
 const stringifyRating = (rating) => {

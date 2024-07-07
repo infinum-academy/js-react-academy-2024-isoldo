@@ -2,6 +2,7 @@ import { IReview } from "@/typings/Review.type";
 import { Container, Heading } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
+import { useState } from "react";
 
 function getReviews(): IReview[] {
   const reviews: IReview[] = [
@@ -29,8 +30,10 @@ function getReviews(): IReview[] {
 }
 
 export default function ShowReviewSection() {
-  const reviews: IReview[] = getReviews();
-  const onSubmitClick = (newReview: IReview) => console.log({newReview});
+  const [reviews, setReviews] = useState<IReview[]>(getReviews());
+  const onSubmitClick = (newReview: IReview) => {
+    setReviews([...reviews, newReview]);
+  }
 
   return (
     <Container>

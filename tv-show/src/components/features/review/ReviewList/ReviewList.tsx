@@ -10,9 +10,6 @@ interface IReviewListProps {
 export default function ReviewList({title='Reviews', reviews}: IReviewListProps) {
   return (
     <Container>
-      <Heading size='md'>
-        {title}
-      </Heading>
       <Flex marginBottom={4} gap={4} direction="column">
         {reviews.map((review, index) => {
           return <ReviewItem

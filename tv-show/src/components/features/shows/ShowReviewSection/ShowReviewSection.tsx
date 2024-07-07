@@ -32,6 +32,9 @@ export default function ShowReviewSection() {
 
   return (
     <Container>
+       <Heading size='md'>
+        Reviews
+      </Heading>
       <ReviewList reviews={reviews} />
     </Container>
   )

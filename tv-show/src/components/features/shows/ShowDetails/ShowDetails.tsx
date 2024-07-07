@@ -7,7 +7,7 @@ export default function ShowDetails(props: IShow) {
 
   return (
     <Container>
-      <Card>
+      <Card marginBottom={8}>
         <CardHeader>
           <Image src={imageUrl} fallbackSrc='https://fakeimg.pl/600x400/353b38/e85115?text=TV+Show' pb={4}/>
           <Heading size='md'>

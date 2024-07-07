@@ -1,4 +1,5 @@
 import { IReview } from "@/typings/Review.type";
+import { getEmailAndAvatar } from "@/utils/randomUserGenerator";
 import { Button, Card, CardBody, CardHeader, Container, Flex, Heading, NumberInput, NumberInputField, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -9,6 +10,8 @@ interface IReviewForm {
 export default function ReviewForm({onSubmitClick}: IReviewForm) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(1);
+
+  const { email, avatar } = getEmailAndAvatar();
 
   return(
     <Container marginBottom={4}>
@@ -31,8 +34,8 @@ export default function ReviewForm({onSubmitClick}: IReviewForm) {
               const newReview: IReview = {
                 comment,
                 rating,
-                email: 'newguy@infinum.com',
-                avatar: 'https://fakeimg.pl/60x60/e000a1/2734e6?text=NG&font=noto'
+                email,
+                avatar
               };
               onSubmitClick(newReview);
             }}>Submit review</Button>

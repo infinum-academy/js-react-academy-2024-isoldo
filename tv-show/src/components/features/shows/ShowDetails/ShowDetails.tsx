@@ -3,8 +3,9 @@ import { Box, Card, CardBody, CardHeader, Container, Heading, Image, Stack, Stac
 
 export default function ShowDetails(props: IShow) {
   const {title, description, averageRating, imageUrl} = props;
-  const averageRatingText = averageRating ? (Math.round((averageRating + Number.EPSILON) * 100) / 100)
-  + ' / 10' : 'no ratings'
+  const averageRatingText = (typeof averageRating !== 'undefined') ?
+    (Math.round((averageRating + Number.EPSILON) * 100) / 100) + ' / 10' :
+    'no ratings';
 
   return (
     <Container>

@@ -18,6 +18,17 @@ function storeReviewsToLocalStorage(reviews: IReview[]) {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(reviews));
 }
 
+function calculateAverageRating(reviews: IReview[]) {
+  let averageRating = 0;
+
+  reviews.forEach((review) => averageRating += review.rating);
+  if(reviews.length) {
+    averageRating /= reviews.length;
+  }
+
+  return averageRating ?? undefined;
+}
+
 interface IShowReviewSection {
   setAverageRating: (avg: number | undefined) => void;
 }
@@ -33,7 +44,7 @@ export default function ShowReviewSection({setAverageRating}: IShowReviewSection
     const updatedReviews = reviews.filter((review) => review != deletedReview);
     setReviews(updatedReviews);
     setUpdated(true);
-  }
+  };
 
   useEffect(() => {
     const localStorageReviews = loadReviewsFromLocalStorage();
@@ -41,12 +52,8 @@ export default function ShowReviewSection({setAverageRating}: IShowReviewSection
   }, []);
 
   useEffect(() => {
-    let averageRating = 0;
-    if(reviews.length) {
-      reviews.forEach((review => averageRating += review.rating));
-      averageRating /= reviews.length;
-      setAverageRating(averageRating);
-    }
+    const averageRating = calculateAverageRating(reviews);
+    setAverageRating(averageRating);
     if(updated) {
       setUpdated(false);
       storeReviewsToLocalStorage(reviews);

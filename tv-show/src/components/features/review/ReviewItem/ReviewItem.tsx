@@ -8,7 +8,7 @@ interface IReviewItem {
 
 export default function ReviewItem(props: IReviewItem) {
   const {email, avatar, rating, comment} = props.review;
-  const ratingText = rating + ' / 10';
+  const ratingText = rating + ' / 5';
 
   return (
     <Container>

@@ -14,7 +14,7 @@ export default function Rating({label, onChange, value}: IRating) {
   return (
     <Container>
       {
-        [...Array(maxRating)].map((_currentRating, index) => {
+        [...Array(maxRating)].map((currentRating, index) => {
           return (
             <RatingIcon
               key={index}

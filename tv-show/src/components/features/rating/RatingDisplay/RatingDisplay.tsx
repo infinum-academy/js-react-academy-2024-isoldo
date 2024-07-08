@@ -10,7 +10,7 @@ export default function RatingDisplay({ value }: IRatingDisplay) {
   return (
     <Container>
       {
-        [...Array(maxRating)].map((_currentRating, index) => {
+        [...Array(maxRating)].map((currentRating, index) => {
           return (
             <StarIcon
               key={index}

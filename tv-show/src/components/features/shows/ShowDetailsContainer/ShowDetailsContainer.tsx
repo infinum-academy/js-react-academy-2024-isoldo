@@ -11,11 +11,11 @@ function getShowData(): IShow {
   return showData;
 }
 
-interface IShowDetailsContainer {
+interface IShowDetailsContainerProps {
   averageRating: number | undefined;
 }
 
-export default function ShowDetailsContainer({averageRating}: IShowDetailsContainer) {
+export default function ShowDetailsContainer({averageRating}: IShowDetailsContainerProps) {
   const {title, description, imageUrl} = getShowData();
 
   return <ShowDetails title={title} description={description} imageUrl={imageUrl} averageRating={averageRating}/>

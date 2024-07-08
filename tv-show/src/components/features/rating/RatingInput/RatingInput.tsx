@@ -2,13 +2,13 @@ import { Container } from "@chakra-ui/react";
 import { useState } from "react";
 import RatingIcon from "../RatingIcon/RatingIcon";
 
-interface IRating {
+interface IRatingProps {
   label: string;
   onChange: (rating: number) => void;
   value: number;
 }
 
-export default function RatingInput({label, onChange, value}: IRating) {
+export default function RatingInput({label, onChange, value}: IRatingProps) {
   const [hoverRating, setHoverRating] = useState(0);
   const maxRating = 5;
   return (

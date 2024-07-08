@@ -1,11 +1,11 @@
 import { Container } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-interface IRatingDisplay {
+interface IRatingDisplayProps {
   value: number;
 }
 
-export default function RatingDisplay({ value }: IRatingDisplay) {
+export default function RatingDisplay({ value }: IRatingDisplayProps) {
   const maxRating = 5;
   return (
     <Container>

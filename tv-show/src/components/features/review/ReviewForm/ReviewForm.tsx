@@ -4,11 +4,11 @@ import { Button, Card, CardBody, Container, Flex, NumberInput, NumberInputField,
 import { useState } from "react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
 
-interface IReviewForm {
+interface IReviewFormProps {
   onSubmitClick: (newReview: IReview) => void;
 }
 
-export default function ReviewForm({onSubmitClick}: IReviewForm) {
+export default function ReviewForm({onSubmitClick}: IReviewFormProps) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
 

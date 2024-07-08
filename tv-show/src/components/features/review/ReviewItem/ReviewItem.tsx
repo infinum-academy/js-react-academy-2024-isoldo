@@ -2,12 +2,12 @@ import { IReview } from "@/typings/Review.type";
 import { Box, Button, Card, CardBody, Container, Flex, Image, Stack } from "@chakra-ui/react";
 import RatingDisplay from "../../rating/RatingDisplay/RatingDisplay";
 
-interface IReviewItem {
+interface IReviewItemProps {
   review: IReview;
   onRemoveClick: (review: IReview) => void;
 }
 
-export default function ReviewItem(props: IReviewItem) {
+export default function ReviewItem(props: IReviewItemProps) {
   const {email, avatar, rating, comment} = props.review;
 
   return (

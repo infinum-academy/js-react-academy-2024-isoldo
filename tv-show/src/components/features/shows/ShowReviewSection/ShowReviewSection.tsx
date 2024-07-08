@@ -29,11 +29,11 @@ function calculateAverageRating(reviews: IReview[]) {
   return averageRating || undefined;
 }
 
-interface IShowReviewSection {
+interface IShowReviewSectionProps {
   setAverageRating: (avg: number | undefined) => void;
 }
 
-export default function ShowReviewSection({setAverageRating}: IShowReviewSection) {
+export default function ShowReviewSection({setAverageRating}: IShowReviewSectionProps) {
   const [reviews, setReviews] = useState<IReview[]>([]);
   const [updated, setUpdated] = useState(false);
   const onSubmitClick = (newReview: IReview) => {

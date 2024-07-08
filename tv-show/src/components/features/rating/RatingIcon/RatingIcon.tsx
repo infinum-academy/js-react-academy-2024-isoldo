@@ -1,7 +1,7 @@
 import { StarIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 
-interface IRatingIcon {
+interface IRatingIconProps {
   index: number;
   hoverRating: number;
   onMouseEnter: (index: number) => void;
@@ -9,7 +9,7 @@ interface IRatingIcon {
   onClick: (index: number) => void;
 }
 
-export default function RatingIcon({index, hoverRating, onMouseEnter, onMouseLeave, onClick}: IRatingIcon) {
+export default function RatingIcon({index, hoverRating, onMouseEnter, onMouseLeave, onClick}: IRatingIconProps) {
   return (
     <IconButton
       isRound

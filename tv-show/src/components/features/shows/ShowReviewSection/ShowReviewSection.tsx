@@ -2,7 +2,7 @@ import { IReview } from "@/typings/Review.type";
 import { Container, Heading } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function getReviews(): IReview[] {
   const reviews: IReview[] = [
@@ -29,11 +29,24 @@ function getReviews(): IReview[] {
   return reviews;
 }
 
-export default function ShowReviewSection() {
+interface IShowReviewSection {
+  setAverageRating: (avg: number | undefined) => void;
+}
+
+export default function ShowReviewSection({setAverageRating}: IShowReviewSection) {
   const [reviews, setReviews] = useState<IReview[]>(getReviews());
   const onSubmitClick = (newReview: IReview) => {
     setReviews([...reviews, newReview]);
+  };
+
+ useEffect(() => {
+  let averageRating = 0;
+  if(reviews.length) {
+    reviews.forEach((review => averageRating += review.rating));
+    averageRating /= reviews.length;
+    setAverageRating(averageRating);
   }
+ }, [reviews]);
 
   return (
     <Container>

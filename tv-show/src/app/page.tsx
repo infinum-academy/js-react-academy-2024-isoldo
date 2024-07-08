@@ -2,8 +2,7 @@
 
 import { Container, Heading } from "@chakra-ui/react";
 import styles from "./page.module.css";
-import ShowDetailsContainer from "@/components/features/shows/ShowDetailsContainer/ShowDetailsContainer";
-import ShowReviewSection from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
+import ShowContainer from "@/components/features/shows/ShowContainer/ShowContainer";
 
 const APP_NAME = "TV Shows App"
 
@@ -12,8 +11,7 @@ export default function Home() {
     <main className={styles.main}>
       <Container>
         <Heading>{APP_NAME}</Heading>
-        <ShowDetailsContainer />
-        <ShowReviewSection />
+        <ShowContainer />
       </Container>
     </main>
   );

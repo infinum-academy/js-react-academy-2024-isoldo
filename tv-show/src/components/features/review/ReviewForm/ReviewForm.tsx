@@ -20,7 +20,7 @@ export default function ReviewForm({onSubmitClick}: IReviewForm) {
         <CardBody>
           <Textarea
             placeholder='What did you think of the show?'
-            onChange={(e) => setComment(e.target.value)}
+            onBlur={(e) => setComment(e.target.value)}
           />
           <Rating label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
           <Flex flexDir='row-reverse'>

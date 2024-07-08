@@ -3,19 +3,9 @@ const MAX_RATING = 10;
 
 let reviewList = [];
 
-const render = () => {
-  const todoListElement = document.createElement('ul');
+const createAverateRatingElement = (reviewList) => {
   let sum = 0;
-
-  reviewList.forEach((review) => {
-    const reviewItem = createReview(review);
-    todoListElement.appendChild(reviewItem);
-    sum += review.rating;
-  });
-
-  const reviews = document.getElementById('reviews');
-  reviews.innerHTML = '';
-  reviews.appendChild(todoListElement);
+  reviewList.forEach((reviewItem) => sum += reviewItem.rating);
 
   const avgRatingString = reviewList.length ? (sum/reviewList.length).toString() + '/' + MAX_RATING.toString() : 'N/A';
 
@@ -23,14 +13,30 @@ const render = () => {
   if(showAvgRatingElement) {
     showAvgRatingElement.parentNode.removeChild(showAvgRatingElement);
   }
-
   const newShowAvgRatingElementDiv = document.createElement('div');
   newShowAvgRatingElementDiv.id = 'show-avg-rating';
   const newShowAvgRatingElementSpan = document.createElement('span');
   newShowAvgRatingElementSpan.textContent = avgRatingString;
   newShowAvgRatingElementDiv.appendChild(newShowAvgRatingElementSpan);
 
-  document.getElementById('show-content').appendChild(newShowAvgRatingElementDiv);
+  return newShowAvgRatingElementDiv;
+}
+
+const render = () => {
+  const todoListElement = document.createElement('ul');
+
+  reviewList.forEach((review) => {
+    const reviewItem = createReview(review);
+    todoListElement.appendChild(reviewItem);
+  });
+
+  const reviews = document.getElementById('reviews');
+  reviews.innerHTML = '';
+  reviews.appendChild(todoListElement);
+
+  const averateRatingElement = createAverateRatingElement(reviewList);
+
+  document.getElementById('show-content').appendChild(averateRatingElement);
 }
 
 const createReview = (review) => {

@@ -1,5 +1,5 @@
 import { IReview } from "@/typings/Review.type";
-import { Container, Heading } from "@chakra-ui/react";
+import { Box, Card, CardBody, Container, Heading, Stack } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
 import { useEffect, useState } from "react";
@@ -54,11 +54,21 @@ export default function ShowReviewSection({setAverageRating}: IShowReviewSection
 
   return (
     <Container>
-       <Heading size='md'>
+       <Heading size='md' marginBottom={4}>
         Reviews
       </Heading>
-      <ReviewForm onSubmitClick={onSubmitClick}/>
-      <ReviewList reviews={reviews} onRemoveClick={onRemoveClick} />
+      <Card variant='unstyled'>
+        <CardBody>
+          <Stack>
+            <Box>
+              <ReviewForm onSubmitClick={onSubmitClick}/>
+            </Box>
+            <Box>
+              <ReviewList reviews={reviews} onRemoveClick={onRemoveClick} />
+            </Box>
+          </Stack>
+        </CardBody>
+      </Card>
     </Container>
   )
 }

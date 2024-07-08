@@ -16,9 +16,6 @@ export default function ReviewForm({onSubmitClick}: IReviewForm) {
   return(
     <Container marginBottom={4}>
       <Card>
-        <CardHeader>
-          <Heading size='md'>Leave a review</Heading>
-        </CardHeader>
         <CardBody>
           <Textarea
             placeholder='What did you think of the show?'

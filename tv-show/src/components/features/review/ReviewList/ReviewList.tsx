@@ -10,7 +10,6 @@ interface IReviewListProps {
 
 export default function ReviewList({title='Reviews', reviews, onRemoveClick}: IReviewListProps) {
   return (
-    <Container>
       <Flex marginBottom={4} gap={4} direction="column">
         {reviews.map((review, index) => {
           return <ReviewItem
@@ -19,6 +18,5 @@ export default function ReviewList({title='Reviews', reviews, onRemoveClick}: IR
             onRemoveClick={onRemoveClick} />
         })}
       </Flex>
-    </Container>
   )
 }

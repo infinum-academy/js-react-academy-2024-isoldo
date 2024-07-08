@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Better Call Saul - Infinum React Academy Homework</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="page-container">
+      <h1>TV Shows App</h1>
+      <div id="content-container">
+        <div id="show-content">
+          <div id="show-title">
+            <h2>Better Call Saul</h2>
+          </div>
+          <div id="show-img">
+            <img src="assets/Better_Call_Saul_logo.svg"/>
+          </div>
+          <div id="show-desc">
+            <span>The trials and tribulations of criminal lawyer Jimmy McGill in the years leading up to his fateful run-in with Walter White and Jesse Pinkman.</span>
+          </div>
+        </div>
+        <div id="user-content">
+          <div id="leave-review">
+            <div class="review-box-label">
+              <label for="review-box">How did you find the show?</label>
+            </div>
+            <div class="review-box-textarea">
+              <textarea id="review-box" name="review-box" placeholder="I found the show..."></textarea>
+            </div>
+            <div class="rating-box-label">
+              <label for="rating-box-label">How would you rate the show on a scale from 1 to 10?</label>
+            </div>
+            <div class="rating-box-input">
+              <input id="rating" type="number" max="10" min="1" placeholder="10"/>
+            </div>
+            <div class="submit-review">
+              <button id="submit" onclick="onSubmit()">Post</button>
+            </div>
+          </div>
+          <div id="reviews">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

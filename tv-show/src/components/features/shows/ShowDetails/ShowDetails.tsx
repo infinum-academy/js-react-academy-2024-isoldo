@@ -3,12 +3,17 @@ import { Box, Card, CardBody, CardHeader, Container, Heading, Image, Stack, Stac
 
 function getAverageRatingText(averageRating: number | undefined) {
   return (typeof averageRating !== 'undefined') ?
-    (Math.round((averageRating + Number.EPSILON) * 100) / 100) + ' / 10' :
+    (Math.round((averageRating + Number.EPSILON) * 100) / 100) + ' / 5' :
     'no ratings';
 }
 
-export default function ShowDetails(props: IShow) {
-  const {title, description, averageRating, imageUrl} = props;
+interface IShowDetailsProps {
+  show: IShow;
+  averageRating: number | undefined;
+}
+
+export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
+  const {title, description, imageUrl} = show;
   const averageRatingText = getAverageRatingText(averageRating);
 
   return (

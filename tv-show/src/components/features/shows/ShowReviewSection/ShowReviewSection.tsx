@@ -4,29 +4,18 @@ import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
 import { useEffect, useState } from "react";
 
-function getReviews(): IReview[] {
-  const reviews: IReview[] = [
-    {
-      email: 'dummy@infinum.com',
-      avatar: 'https://fakeimg.pl/60x60/353b38/eb9e9e?text=JD&font=noto',
-      rating: 8,
-      comment: 'Almost as good as Breaking Bad'
-    },
-    {
-      email: 'silly@infinum.com',
-      avatar: 'https://fakeimg.pl/60x60/349161/0010eb?text=SY&font=noto',
-      rating: 4,
-      comment: 'We need a Kim spin-off'
-    },
-    {
-      email: 'putty@infinum.com',
-      avatar: 'https://fakeimg.pl/60x60/301f60/a5d400?text=PT&font=noto',
-      rating: 10,
-      comment: 'Best. Show. Ever.'
-    }
-  ];
+const LOCAL_STORAGE_KEY = 'reviews';
 
-  return reviews;
+function loadReviewsFromLocalStorage(): IReview[] {
+  const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if(!reviewsString) {
+    return [];
+  }
+  return JSON.parse(reviewsString);
+}
+
+function storeReviewsToLocalStorage(reviews: IReview[]) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(reviews));
 }
 
 interface IShowReviewSection {
@@ -34,23 +23,35 @@ interface IShowReviewSection {
 }
 
 export default function ShowReviewSection({setAverageRating}: IShowReviewSection) {
-  const [reviews, setReviews] = useState<IReview[]>(getReviews());
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  const [updated, setUpdated] = useState(false);
   const onSubmitClick = (newReview: IReview) => {
     setReviews([...reviews, newReview]);
+    setUpdated(true);
   };
   const onRemoveClick = (deletedReview: IReview) => {
     const updatedReviews = reviews.filter((review) => review != deletedReview);
     setReviews(updatedReviews);
+    setUpdated(true);
   }
 
- useEffect(() => {
-  let averageRating = 0;
-  if(reviews.length) {
-    reviews.forEach((review => averageRating += review.rating));
-    averageRating /= reviews.length;
-    setAverageRating(averageRating);
-  }
- }, [reviews]);
+  useEffect(() => {
+    const localStorageReviews = loadReviewsFromLocalStorage();
+    setReviews(localStorageReviews);
+  }, []);
+
+  useEffect(() => {
+    let averageRating = 0;
+    if(reviews.length) {
+      reviews.forEach((review => averageRating += review.rating));
+      averageRating /= reviews.length;
+      setAverageRating(averageRating);
+    }
+    if(updated) {
+      setUpdated(false);
+      storeReviewsToLocalStorage(reviews);
+    }
+  }, [reviews]);
 
   return (
     <Container>

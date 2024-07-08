@@ -1,11 +1,15 @@
 import { IShow } from "@/typings/Show.type";
 import { Box, Card, CardBody, CardHeader, Container, Heading, Image, Stack, StackDivider } from "@chakra-ui/react";
 
-export default function ShowDetails(props: IShow) {
-  const {title, description, averageRating, imageUrl} = props;
-  const averageRatingText = (typeof averageRating !== 'undefined') ?
+function getAverageRatingText(averageRating: number | undefined) {
+  return (typeof averageRating !== 'undefined') ?
     (Math.round((averageRating + Number.EPSILON) * 100) / 100) + ' / 10' :
     'no ratings';
+}
+
+export default function ShowDetails(props: IShow) {
+  const {title, description, averageRating, imageUrl} = props;
+  const averageRatingText = getAverageRatingText(averageRating);
 
   return (
     <Container>

@@ -8,7 +8,7 @@ interface IRating {
   value: number;
 }
 
-export default function Rating({label, onChange, value}: IRating) {
+export default function RatingInput({label, onChange, value}: IRating) {
   const [hoverRating, setHoverRating] = useState(0);
   const maxRating = 5;
   return (

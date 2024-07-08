@@ -2,7 +2,7 @@ import { IReview } from "@/typings/Review.type";
 import { getEmailAndAvatar } from "@/utils/randomUserGenerator";
 import { Button, Card, CardBody, Container, Flex, NumberInput, NumberInputField, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
-import Rating from "../../rating/Rating/Rating";
+import RatingInput from "../../rating/RatingInput/RatingInput";
 
 interface IReviewForm {
   onSubmitClick: (newReview: IReview) => void;
@@ -22,7 +22,7 @@ export default function ReviewForm({onSubmitClick}: IReviewForm) {
             placeholder='What did you think of the show?'
             onBlur={(e) => setComment(e.target.value)}
           />
-          <Rating label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
+          <RatingInput label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
           <Flex justifyContent='flex-end'>
             <Button onClick={() => {
               const newReview: IReview = {

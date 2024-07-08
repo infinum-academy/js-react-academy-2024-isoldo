@@ -1,6 +1,6 @@
 import { IReview } from "@/typings/Review.type";
 import ReviewItem from "../ReviewItem/ReviewItem";
-import { Container, Flex, Heading } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 interface IReviewListProps {
   title?: string;

@@ -1,6 +1,6 @@
 import { IReview } from "@/typings/Review.type";
 import { getEmailAndAvatar } from "@/utils/randomUserGenerator";
-import { Button, Card, CardBody, CardHeader, Container, Flex, Heading, NumberInput, NumberInputField, Textarea } from "@chakra-ui/react";
+import { Button, Card, CardBody, Container, Flex, NumberInput, NumberInputField, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface IReviewForm {

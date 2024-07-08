@@ -1,8 +1,13 @@
 import { IReview } from "@/typings/Review.type";
-import { Box, Card, CardBody, Container, Flex, Image, Stack } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, Container, Flex, Image, Stack } from "@chakra-ui/react";
 
-export default function ReviewItem(props: IReview) {
-  const {email, avatar, rating, comment} = props;
+interface IReviewItem {
+  review: IReview;
+  onRemoveClick: (review: IReview) => void;
+}
+
+export default function ReviewItem(props: IReviewItem) {
+  const {email, avatar, rating, comment} = props.review;
   const ratingText = rating + ' / 10';
 
   return (
@@ -16,6 +21,9 @@ export default function ReviewItem(props: IReview) {
             </Flex>
             <Flex>{ratingText}</Flex>
             <Flex>{comment}</Flex>
+            <Flex flexDir='row-reverse'>
+              <Button onClick={() => props.onRemoveClick(props.review)}>Remove</Button>
+            </Flex>
           </Stack>
         </CardBody>
       </Card>

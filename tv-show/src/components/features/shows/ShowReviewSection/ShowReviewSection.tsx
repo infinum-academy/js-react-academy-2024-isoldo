@@ -38,6 +38,10 @@ export default function ShowReviewSection({setAverageRating}: IShowReviewSection
   const onSubmitClick = (newReview: IReview) => {
     setReviews([...reviews, newReview]);
   };
+  const onRemoveClick = (deletedReview: IReview) => {
+    const updatedReviews = reviews.filter((review) => review != deletedReview);
+    setReviews(updatedReviews);
+  }
 
  useEffect(() => {
   let averageRating = 0;
@@ -54,7 +58,7 @@ export default function ShowReviewSection({setAverageRating}: IShowReviewSection
         Reviews
       </Heading>
       <ReviewForm onSubmitClick={onSubmitClick}/>
-      <ReviewList reviews={reviews} />
+      <ReviewList reviews={reviews} onRemoveClick={onRemoveClick} />
     </Container>
   )
 }

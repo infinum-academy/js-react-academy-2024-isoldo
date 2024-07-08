@@ -1,5 +1,6 @@
 import { IReview } from "@/typings/Review.type";
 import { Box, Button, Card, CardBody, Container, Flex, Image, Stack } from "@chakra-ui/react";
+import RatingDisplay from "../../rating/RatingDisplay/RatingDisplay";
 
 interface IReviewItem {
   review: IReview;
@@ -8,7 +9,6 @@ interface IReviewItem {
 
 export default function ReviewItem(props: IReviewItem) {
   const {email, avatar, rating, comment} = props.review;
-  const ratingText = rating + ' / 5';
 
   return (
     <Container>
@@ -19,7 +19,7 @@ export default function ReviewItem(props: IReviewItem) {
               <Image src={avatar} marginRight={4}/>
               <Box>{email}</Box>
             </Flex>
-            <Flex>{ratingText}</Flex>
+            <Flex><RatingDisplay value={rating} /></Flex>
             <Flex>{comment}</Flex>
             <Flex flexDir='row-reverse'>
               <Button onClick={() => props.onRemoveClick(props.review)}>Remove</Button>

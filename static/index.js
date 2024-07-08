@@ -4,18 +4,18 @@ const MAX_RATING = 10;
 let reviewList = [];
 
 const render = () => {
-  const ul = document.createElement('ul');
+  const todoListElement = document.createElement('ul');
   let sum = 0;
 
-  reviewList.forEach((r) => {
-    const reviewItem = createReview(r);
-    ul.appendChild(reviewItem);
-    sum += r.rating;
+  reviewList.forEach((review) => {
+    const reviewItem = createReview(review);
+    todoListElement.appendChild(reviewItem);
+    sum += review.rating;
   });
 
   const reviews = document.getElementById('reviews');
   reviews.innerHTML = '';
-  reviews.appendChild(ul);
+  reviews.appendChild(todoListElement);
 
   const avgRatingString = reviewList.length ? (sum/reviewList.length).toString() + '/' + MAX_RATING.toString() : 'N/A';
 
@@ -34,7 +34,7 @@ const render = () => {
   document.getElementById('show-content').appendChild(newShowAvgRatingElementDiv);
 }
 
-const createReview = (r) => {
+const createReview = (review) => {
   const reviewListItem = document.createElement('li');
   const reviewTextDiv = document.createElement('div');
   const reviewTextSpan = document.createElement('span');
@@ -43,14 +43,14 @@ const createReview = (r) => {
   const reviewDeleteDiv = document.createElement('div');
   const reviewDeleteButton = document.createElement('button');
 
-  reviewTextSpan.textContent = r.text;
+  reviewTextSpan.textContent = review.text;
   reviewTextDiv.appendChild(reviewTextSpan);
 
-  reviewRatingSpan.textContent = stringifyRating(r.rating);
+  reviewRatingSpan.textContent = stringifyRating(review.rating);
   reviewRatingDiv.appendChild(reviewRatingSpan);
 
   reviewDeleteButton.textContent = 'Remove';
-  reviewDeleteButton.onclick = () => removeReview(r);
+  reviewDeleteButton.onclick = () => removeReview(review);
   reviewDeleteDiv.appendChild(reviewDeleteButton);
 
   reviewListItem.appendChild(reviewTextDiv);
@@ -60,8 +60,8 @@ const createReview = (r) => {
   return reviewListItem;
 }
 
-const removeReview = (r) => {
-  reviewList = reviewList.filter((item) => r !== item);
+const removeReview = (review) => {
+  reviewList = reviewList.filter((item) => review !== item);
   saveToLocalStorage();
   render();
 }

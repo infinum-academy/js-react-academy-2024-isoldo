@@ -23,7 +23,7 @@ export default function ReviewForm({onSubmitClick}: IReviewForm) {
             onBlur={(e) => setComment(e.target.value)}
           />
           <Rating label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
-          <Flex flexDir='row-reverse'>
+          <Flex justifyContent='flex-end'>
             <Button onClick={() => {
               const newReview: IReview = {
                 comment,

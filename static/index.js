@@ -21,7 +21,6 @@ const render = () => {
 
   const showAvgRatingElement = document.getElementById('show-avg-rating');
   if(showAvgRatingElement) {
-    console.warn('Removing existing avg div');
     showAvgRatingElement.parentNode.removeChild(showAvgRatingElement);
   }
 

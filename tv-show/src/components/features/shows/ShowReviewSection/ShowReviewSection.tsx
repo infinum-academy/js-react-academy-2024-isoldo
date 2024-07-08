@@ -26,7 +26,7 @@ function calculateAverageRating(reviews: IReview[]) {
     averageRating /= reviews.length;
   }
 
-  return averageRating ? averageRating : undefined;
+  return averageRating || undefined;
 }
 
 interface IShowReviewSection {

@@ -69,7 +69,7 @@ export default function ShowContainer() {
   useEffect(() => {
     setShowData(getShowData());
     setReviews(getReviews());
-  }, []);
+  }, [setShowData, setReviews]);
 
   if(!showData || !reviews) {
     return;

@@ -11,7 +11,7 @@ import useSWR from "swr";
 export default function ShowDetailsPage() {
   const { id } = useParams();
 
-  const { data, error, isLoading } = useSWR(`/all-shows/`, () => getShowDetails(Number(id)));
+  const { data, error, isLoading } = useSWR(`/all-shows/${id}`, () => getShowDetails(Number(id)));
 
   if(error) {
     return (

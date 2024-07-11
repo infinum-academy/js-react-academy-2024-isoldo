@@ -28,14 +28,5 @@ export default function ShowDetailsPage() {
     );
   }
 
-  // adapt the API interface to the internal interface (camelCase vs snake_case)
-  const showData: IShow = {
-    id: Number(data.id),
-    title: data.title,
-    description: data.description,
-    imageUrl: data.image_url,
-    numberOfReviews: data.no_of_reviews
-  };
-
-  return <ShowContainer showData={showData} />
+  return <ShowContainer showData={data} />
 }

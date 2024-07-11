@@ -3,7 +3,6 @@
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import ShowsList from "@/components/shared/ShowsList/ShowsList"
 import { getTopRatedShowsDetails } from "@/fetchers/shows";
-import { IShow } from "@/typings/Show.type";
 import { Flex, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 
@@ -25,15 +24,5 @@ export default function ShowsListTopPage() {
     );
   }
 
-  // adapt the API interface to the internal interface (camelCase vs snake_case)
-  const showData: IShow[] = data.shows.map((show) => { return {
-    id: Number(show.id),
-    title: show.title,
-    description: show.description,
-    imageUrl: show.image_url,
-    numberOfReviews: show.no_of_reviews,
-    averageRating: show.average_rating
-  }});
-
-  return <ShowsList showsList={showData} />;
+  return <ShowsList showsList={data.shows} />;
 }

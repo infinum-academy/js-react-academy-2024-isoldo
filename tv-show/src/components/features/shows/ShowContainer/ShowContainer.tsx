@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
 
 interface IReviews {
-  showId: number;
+  showId: string;
   reviews: IReview[];
 }
 
-function getReviews(id: number): IReview[] {
+function getReviews(id: string): IReview[] {
   const allReviews = loadReviewsFromLocalStorage();
 
   const reviewById = allReviews.find(review => review.showId === id);
@@ -29,7 +29,7 @@ function loadReviewsFromLocalStorage(): IReviews[] {
   return JSON.parse(reviewsString);
 }
 
-function storeReviewsToLocalStorage(showId: number, reviews: IReview[]) {
+function storeReviewsToLocalStorage(showId: string, reviews: IReview[]) {
   const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
   const reviewsObj: IReviews[] = JSON.parse(reviewsString || '[]');
 

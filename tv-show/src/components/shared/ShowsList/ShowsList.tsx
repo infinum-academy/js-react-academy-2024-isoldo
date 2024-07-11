@@ -1,5 +1,5 @@
 import { IShow } from "@/typings/Show.type";
-import { Flex, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import ShowCard from "../ShowCard/ShowCard";
 
 interface IShowsListProps {
@@ -11,7 +11,7 @@ export default function ShowsList({showsList}: IShowsListProps) {
       <SimpleGrid minChildWidth='240px'>
       {
         showsList.map((show, index) => { return (
-            <ShowCard key={index} title={show.title} imageUrl={show.imageUrl} averageRating={show.averageRating} />
+            <ShowCard key={index} title={show.title} imageUrl={show.image_url} averageRating={show.average_rating} />
         )})
       }
       </SimpleGrid>

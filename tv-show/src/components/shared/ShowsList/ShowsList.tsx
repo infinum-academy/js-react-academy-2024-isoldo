@@ -10,8 +10,8 @@ export default function ShowsList({showsList}: IShowsListProps) {
   return (
       <SimpleGrid minChildWidth='240px'>
       {
-        showsList.map((show) => { return (
-            <ShowCard title={show.title} imageUrl={show.imageUrl} averageRating={show.averageRating} />
+        showsList.map((show, index) => { return (
+            <ShowCard key={index} title={show.title} imageUrl={show.imageUrl} averageRating={show.averageRating} />
         )})
       }
       </SimpleGrid>

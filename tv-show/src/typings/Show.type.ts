@@ -3,5 +3,6 @@ export interface IShow {
   title: string;
   description: string;
   imageUrl?: string;
+  numberOfReviews: number;
   averageRating?: number;
 }

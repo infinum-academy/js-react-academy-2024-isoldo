@@ -8,6 +8,15 @@ export function getShowsDetails() {
   return fetcher<IShowsResponse>('/api/shows');
 }
 
+interface IShowsJson {
+  id: string;
+  average_rating: number;
+  description: string;
+  image_url: string;
+  no_of_reviews: number;
+  title: string;
+}
+
 export function getShowDetails(id: number) {
-  return fetcher<IShow>(`/api/shows/${id}`);
+  return fetcher<IShowsJson>(`/api/shows/${id}`);
 }

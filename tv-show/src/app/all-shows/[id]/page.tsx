@@ -18,5 +18,13 @@ export default function ShowDetailsPage() {
 
   if(!data) return <Container>404</Container>;
 
-  return <ShowContainer showData={data} />
+  const showData: IShow = {
+    id: Number(data.id),
+    title: data.title,
+    description: data.description,
+    imageUrl: data.image_url,
+    numberOfReviews: data.no_of_reviews
+  }
+
+  return <ShowContainer showData={showData} />
 }

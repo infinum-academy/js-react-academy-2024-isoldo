@@ -1,5 +1,10 @@
+'use client';
+
 import ShowsList from "@/components/shared/ShowsList/ShowsList"
+import { getShowsDetails } from "@/fetchers/shows";
 import { IShow } from "@/typings/Show.type";
+import { Container } from "@chakra-ui/react";
+import useSWR from "swr";
 
 const mockShows: IShow[] = [
   {
@@ -69,5 +74,12 @@ const mockShows: IShow[] = [
 ];
 
 export default function ShowsListPage() {
-  return <ShowsList showsList={mockShows} />;
+  const { data, error, isLoading } = useSWR(`/all-shows/`, () => getShowsDetails());
+
+  if(error) return <Container>ERROR</Container>;
+
+  if(isLoading || !data) return <Container>Loading...</Container>;
+
+
+  return <ShowsList showsList={data.shows} />;
 }

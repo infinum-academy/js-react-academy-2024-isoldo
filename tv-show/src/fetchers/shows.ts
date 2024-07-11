@@ -8,9 +8,6 @@ export function getShowsDetails() {
   return fetcher<IShowsResponse>('/api/shows');
 }
 
-interface IShowResponse {
-  show: IShow;
-}
-export function getShowDetails(id: string) {
-  return fetcher<IShowResponse>(`/api/shows/${id}`);
+export function getShowDetails(id: number) {
+  return fetcher<IShow>(`/api/shows/${id}`);
 }

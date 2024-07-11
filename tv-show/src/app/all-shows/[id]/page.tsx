@@ -1,9 +1,10 @@
 'use client';
 
 import ShowContainer from "@/components/features/shows/ShowContainer/ShowContainer";
+import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import { getShowDetails } from "@/fetchers/shows";
 import { IShow } from "@/typings/Show.type";
-import { Container } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -12,19 +13,29 @@ export default function ShowDetailsPage() {
 
   const { data, error, isLoading } = useSWR(`/all-shows/`, () => getShowDetails(Number(id)));
 
-  if(error) return <Container>ERROR</Container>;
+  if(error) {
+    return (
+      <ErrorBox title='Error loading data' description={`${error}`}/>
+    );
+  }
 
-  if(isLoading || !data) return <Container>Loading...</Container>;
+  // (!data) here to calm the linter down - data will be defined is both error and isLoading are nullish
+  if(isLoading || !data) {
+    return (
+      <Flex justifyContent='center'>
+        <Spinner size='xl'/>
+      </Flex>
+    );
+  }
 
-  if(!data) return <Container>404</Container>;
-
+  // adapt the API interface to the internal interface (camelCase vs snake_case)
   const showData: IShow = {
     id: Number(data.id),
     title: data.title,
     description: data.description,
     imageUrl: data.image_url,
     numberOfReviews: data.no_of_reviews
-  }
+  };
 
   return <ShowContainer showData={showData} />
 }

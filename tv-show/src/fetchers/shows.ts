@@ -1,16 +1,8 @@
+import { IShow } from "@/typings/Show.type";
 import { fetcher } from "./fetcher";
 
-interface IShowsJson {
-  id: string;
-  average_rating: number;
-  description: string;
-  image_url: string;
-  no_of_reviews: number;
-  title: string;
-}
-
-interface IShowsResponse {
-  shows: IShowsJson[];
+export interface IShowsResponse {
+  shows: IShow[];
 }
 
 export function getShowsDetails() {
@@ -23,5 +15,5 @@ export function getTopRatedShowsDetails() {
 
 
 export function getShowDetails(id: number) {
-  return fetcher<IShowsJson>(`/api/shows/${id}`);
+  return fetcher<IShow>(`/api/shows/${id}`);
 }

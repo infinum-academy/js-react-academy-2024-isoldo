@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SidebarNavigation() {
   return (
-    <VStack h='100vh' justifyContent='space-between'>
+    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
       <VStack>
         <Button href='/all-shows' as={Link}>All shows</Button>
         <Button href='/top-rated' as={Link}>Top rated</Button>

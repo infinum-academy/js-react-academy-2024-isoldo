@@ -1,19 +1,21 @@
-import { Container, Flex, Image } from "@chakra-ui/react";
+import { IShow } from "@/typings/Show.type";
+import { Card, CardBody, Flex, Image, Text } from "@chakra-ui/react";
 
 interface IShowCardProps {
-  title: string;
-  imageUrl?: string;
-  averageRating?: number;
+  show: IShow;
 }
 
-export default function ShowCard({title, imageUrl, averageRating}: IShowCardProps) {
+export default function ShowCard({show}: IShowCardProps) {
+  const {image_url, title, average_rating} = show;
   return (
-    <Container>
-      <Image src={imageUrl} objectFit='cover' boxSize='200px'/>
-      <Flex>
-        {title}
-      </Flex>
-      <Flex>{averageRating}</Flex>
-    </Container>
+    <Card>
+      <CardBody>
+        <Flex flexDir='column'>
+          <Image src={image_url} objectFit='cover' boxSize='200px'/>
+          <Text>{title}</Text>
+          <Text>{average_rating}</Text>
+        </Flex>
+      </CardBody>
+    </Card>
   );
 }

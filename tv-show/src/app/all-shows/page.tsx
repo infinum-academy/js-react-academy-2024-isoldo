@@ -1,8 +1,7 @@
 'use client';
 
-import ShowsList from "@/components/shared/ShowsList/ShowsList";
-import { getShowsDetails } from "@/fetchers/shows";
+import ShowsContainer from "@/components/features/shows/ShowsContainer/ShowsContainer";
 
 export default function ShowsListPage() {
-  return <ShowsList swrKey='/all-shows' fetcher={() => getShowsDetails()} />;
+  return <ShowsContainer type="all" />;
 }

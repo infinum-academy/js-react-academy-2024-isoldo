@@ -1,8 +1,7 @@
 'use client';
 
-import ShowsList from "@/components/shared/ShowsList/ShowsList";
-import { getTopRatedShowsDetails } from "@/fetchers/shows";
+import ShowsContainer from "@/components/features/shows/ShowsContainer/ShowsContainer";
 
-export default function ShowsListTopPage() {
-  return <ShowsList swrKey='/top-rated' fetcher={() => getTopRatedShowsDetails()} />;
+export default function TopRatedShowsListPage() {
+  return <ShowsContainer type="top" />;
 }

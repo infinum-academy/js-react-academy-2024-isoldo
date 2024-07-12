@@ -31,7 +31,7 @@ export default function ShowsList({swrKey, fetcher}: IShowsListProps) {
       <SimpleGrid minChildWidth='240px'>
       {
         (data.shows as IShow[]).map((show) => { return (
-            <ShowCard key={show.id} title={show.title} imageUrl={show.image_url} averageRating={show.average_rating} />
+            <ShowCard show={show} />
         )})
       }
       </SimpleGrid>

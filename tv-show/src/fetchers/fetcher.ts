@@ -7,8 +7,6 @@ export async function fetcher<T>(input: string | URL | Request, init?: RequestIn
 
     const json = await response.json();
 
-    console.log(json);
-
     return json;
   } catch(error) {
     throw new Error(`Response: ${error}`);

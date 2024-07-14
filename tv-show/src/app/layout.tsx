@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import SidebarNavigation from "@/components/shared/SidebarNavigation/SidebarNavigation";
 import { Box, Flex } from "@chakra-ui/react";
+import AuthRedirectContainer from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <AuthRedirectContainer />
           <Flex>
             <SidebarNavigation />
             <Box flex='1' flexDir='row'>

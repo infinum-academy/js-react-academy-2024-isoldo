@@ -1,19 +1,20 @@
 import { IShow } from "@/typings/Show.type";
-import { fetcher } from "./fetcher";
+import { authenticatedFetcher } from "./fetcher";
+import { swrKeys } from "./swrKeys";
 
 export interface IShowsResponse {
   shows: IShow[];
 }
 
 export function getShowsDetails() {
-  return fetcher<IShowsResponse>('/api/shows');
+  return authenticatedFetcher<IShowsResponse>(swrKeys.all_shows());
 }
 
 export function getTopRatedShowsDetails() {
-  return fetcher<IShowsResponse>('/api/shows/top-rated');
+  return authenticatedFetcher<IShowsResponse>(swrKeys.top_rated());
 }
 
 
 export function getShowDetails(id: number) {
-  return fetcher<IShow>(`/api/shows/${id}`);
+  return authenticatedFetcher<{show:IShow}>(swrKeys.show(id));
 }

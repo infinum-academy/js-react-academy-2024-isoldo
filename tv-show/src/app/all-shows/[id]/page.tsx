@@ -3,7 +3,6 @@
 import ShowContainer from "@/components/features/shows/ShowContainer/ShowContainer";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import { getShowDetails } from "@/fetchers/shows";
-import { IShow } from "@/typings/Show.type";
 import { Flex, Spinner } from "@chakra-ui/react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
@@ -28,5 +27,5 @@ export default function ShowDetailsPage() {
     );
   }
 
-  return <ShowContainer showData={data} />
+  return <ShowContainer showData={data.show} />
 }

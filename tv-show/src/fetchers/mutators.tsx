@@ -12,7 +12,7 @@ export async function mutator(url: string, { arg }: { arg: any }) {
   return await response.json();
 }
 
-export async function registerMutator(url: string, { arg }:  {arg: any}) {
+export async function authMutator(url: string, { arg }:  {arg: any}) {
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(arg),

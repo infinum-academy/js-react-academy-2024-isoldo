@@ -1,7 +1,7 @@
 'use client';
 
 import { fetcher } from "@/fetchers/fetcher";
-import { registerMutator } from "@/fetchers/mutators";
+import { authMutator } from "@/fetchers/mutators";
 import { swrKeys } from "@/fetchers/swrKeys";
 import { Button, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ export default function RegisterForm() {
   const [pwMismatchError, setPwMismatchError] = useState(false);
   const { register, watch, handleSubmit } = useForm<IRegisterFormInputs>();
   const { mutate } = useSWR(swrKeys.user(), fetcher);
-  const { trigger } = useSWRMutation(swrKeys.register(), registerMutator, {
+  const { trigger } = useSWRMutation(swrKeys.register(), authMutator, {
     onSuccess: ((data) => {
       mutate(data, {revalidate: false});
     })

@@ -4,7 +4,8 @@ import AuthRedirect from "@/components/shared/AuthRedirect/AuthRedirect";
 import { usePathname } from "next/navigation";
 
 const AUTH_NOT_REQUIRED_PATHS = [
-  "/login"
+  "/login",
+  "/register"
 ];
 
 export default function AuthRedirectContainer() {

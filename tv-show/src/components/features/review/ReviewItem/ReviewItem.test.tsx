@@ -12,11 +12,6 @@ describe('ReviewItem', () => {
     render(<ReviewItem review={review} onRemoveClick={(review) => null}/>);
 
     expect(screen.getByText(email)).toBeInTheDocument();
-    try {
-      expect(screen.getByText(email+'x')).toBeInTheDocument();
-    } catch(e) {
-      expect(true).toBeTruthy();
-    }
   });
 
   it('should render the correct comment', () => {

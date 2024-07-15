@@ -29,12 +29,13 @@ export default function RegisterForm() {
     trigger(data);
   };
 
-  const pw = watch("password");
-  const pw_confirmation = watch("password_confirmation");
+  const password = watch("password");
+  const passwordConfirmation = watch("password_confirmation");
+  const isRegisterButtonDisabled = password !== passwordConfirmation || !passwordConfirmation;
 
   useEffect(() => {
-    setPwMismatchError(pw !== pw_confirmation);
-  }, [pw, pw_confirmation, setPwMismatchError, pwMismatchError]);
+    setPwMismatchError(password !== passwordConfirmation);
+  }, [password, passwordConfirmation, setPwMismatchError, pwMismatchError]);
 
   return (
     <Flex direction='row' justifyContent="center" alignItems="center" marginTop={10}>
@@ -55,7 +56,7 @@ export default function RegisterForm() {
             <Input {...register('password_confirmation')} required type="password" />
           </FormControl>
           {pwMismatchError && <Text color="red">Passwords do not match</Text>}
-          <Button isDisabled={pw!==pw_confirmation || !pw_confirmation} type="submit">Register</Button>
+          <Button isDisabled={isRegisterButtonDisabled} type="submit">Register</Button>
         </Flex>
       </Flex>
     </Flex>

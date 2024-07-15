@@ -2,10 +2,17 @@
 
 import { Button, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SidebarNavigation() {
   const colorScheme = "orange";
+  const router = useRouter();
+
+  const onLogoutClick = () => {
+    localStorage.setItem("register-response-headers", JSON.stringify({}));
+    router.push("/")
+  };
+
   return (
     <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
       <VStack>
@@ -13,7 +20,7 @@ export default function SidebarNavigation() {
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' colorScheme={colorScheme} />
         <ButtonLinkWithSelectHighlight text='My Profile' colorScheme={colorScheme} />
       </VStack>
-      <ButtonLinkWithSelectHighlight text='Log out' colorScheme={colorScheme} />
+      <Button colorScheme={colorScheme} variant={'solid'} onClick={onLogoutClick}>Log out</Button>
 
     </VStack>
   );
@@ -29,8 +36,8 @@ function ButtonLinkWithSelectHighlight({text, href, colorScheme}: IButtonLinkWit
   const isSelectedVariant = () => {return href === path ? 'solid' : 'outline'};
 
   if(href) {
-    return <Button as={Link} href={href} colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
+    return <Button gap={3} as={Link} href={href} colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
   }
-  return <Button colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
+  return <Button gap={3} colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
 
 }

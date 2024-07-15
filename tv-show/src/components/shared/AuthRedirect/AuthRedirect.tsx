@@ -17,13 +17,16 @@ export default function AuthRedirect({ to, condition }: IAuthRedirectProps) {
     return authenticatedFetcher<{user: {id: string, email: string, image_url: string}}>(swrKeys.user());
   });
 
+  const loggedOut = !data && (condition === 'loggedOut');
+  const loggedIn = !!data && (condition === 'loggedIn');
+  console.log({loggedIn, loggedOut, data});
+
   useEffect(() => {
     if(isLoading) {
       return;
     }
 
-    const loggedOut = !data && (condition === 'loggedOut');
-    const loggedIn = !!data && (condition === 'loggedIn');
+    console.log({loggedIn, loggedOut, data});
 
     if(loggedOut || loggedIn) {
       router.push(to);

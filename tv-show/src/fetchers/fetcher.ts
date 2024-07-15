@@ -20,7 +20,6 @@ export async function fetcher<T>(input: string | URL | Request, init?: RequestIn
 
 export async function authenticatedFetcher<T>(input: string | URL | Request, init?: RequestInit | undefined): Promise<T> {
   const headers = JSON.parse(localStorage.getItem("register-response-headers") || "{}");
-  console.log({fetcher_headers: headers});
   try {
     const response = await fetch(input, {
       ...init,

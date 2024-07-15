@@ -1,5 +1,6 @@
 'use client';
 
+import { useUser } from "@/hooks/useUser";
 import { Button, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -7,10 +8,12 @@ import { usePathname, useRouter } from "next/navigation";
 export default function SidebarNavigation() {
   const colorScheme = "orange";
   const router = useRouter();
+  const user = useUser();
 
   const onLogoutClick = () => {
     localStorage.setItem("register-response-headers", JSON.stringify({}));
-    router.push("/")
+    user.mutate(undefined, {revalidate: false});
+    router.push("/");
   };
 
   return (

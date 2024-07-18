@@ -6,23 +6,22 @@ import { IReview } from "@/typings/Review.type";
 import { useEffect, useState } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
 
-function getShowData(): IShow {
-  const showData: IShow = {
-    title: "Better Call Saul",
-    description: "The trials and tribulations of criminal lawyer Jimmy McGill in the years leading up to his fateful run-in with Walter White and Jesse Pinkman.",
-    imageUrl: "https://m.media-amazon.com/images/S/pv-target-images/08fd3bfadb7d07164a560a41d89765396d7be6c2f8475c35837990c1357f4c5f.jpg",
-  };
-
-  return showData;
+interface IReviews {
+  showId: string;
+  reviews: IReview[];
 }
 
-function getReviews(): IReview[] {
-  return loadReviewsFromLocalStorage();
+function getReviews(id: string): IReview[] {
+  const allReviews = loadReviewsFromLocalStorage();
+
+  const reviewById = allReviews.find(review => review.showId === id);
+
+  return reviewById?.reviews || [];
 }
 
 const LOCAL_STORAGE_KEY = 'reviews';
 
-function loadReviewsFromLocalStorage(): IReview[] {
+function loadReviewsFromLocalStorage(): IReviews[] {
   const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
   if(!reviewsString) {
     return [];
@@ -30,8 +29,14 @@ function loadReviewsFromLocalStorage(): IReview[] {
   return JSON.parse(reviewsString);
 }
 
-function storeReviewsToLocalStorage(reviews: IReview[]) {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(reviews));
+function storeReviewsToLocalStorage(showId: string, reviews: IReview[]) {
+  const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
+  const reviewsObj: IReviews[] = JSON.parse(reviewsString || '[]');
+
+  const newReviews = reviewsObj.filter((reviews) => reviews.showId != showId);
+  newReviews.push({showId, reviews});
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReviews));
 }
 
 function calculateAverageRating(reviews: IReview[] | undefined): number | undefined {
@@ -46,9 +51,11 @@ function calculateAverageRating(reviews: IReview[] | undefined): number | undefi
   return averageRating;
 }
 
+interface IShowContainerProps {
+  showData: IShow;
+}
 
-export default function ShowContainer() {
-  const [showData, setShowData] = useState<IShow>();
+export default function ShowContainer({showData}: IShowContainerProps) {
   const [reviews, setReviews] = useState<IReview[]>();
 
   const averageRating = calculateAverageRating(reviews);
@@ -56,20 +63,19 @@ export default function ShowContainer() {
   const onSubmit = (newReview: IReview) => {
     const newReviews = reviews ? [...reviews] : [];
     newReviews.push(newReview);
-    storeReviewsToLocalStorage(newReviews);
+    storeReviewsToLocalStorage(showData.id, newReviews);
     setReviews(newReviews);
   };
 
   const onRemove = (removedReview: IReview) => {
     const newReviews = reviews  && reviews.filter((review) => review != removedReview) || [];
-    storeReviewsToLocalStorage(newReviews);
+    storeReviewsToLocalStorage(showData.id, newReviews);
     setReviews(newReviews);
   }
 
   useEffect(() => {
-    setShowData(getShowData());
-    setReviews(getReviews());
-  }, [setShowData, setReviews]);
+    setReviews(getReviews(showData.id));
+  }, [setReviews]);
 
   if(!showData || !reviews) {
     return;

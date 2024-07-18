@@ -13,14 +13,14 @@ interface IShowDetailsProps {
 }
 
 export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
-  const {title, description, imageUrl} = show;
+  const {title, description, image_url} = show;
   const averageRatingText = getAverageRatingText(averageRating);
 
   return (
     <Container>
       <Card marginBottom={8}>
         <CardHeader>
-          <Image src={imageUrl} fallbackSrc='https://fakeimg.pl/600x400/353b38/e85115?text=TV+Show' pb={4}/>
+          <Image src={image_url} fallbackSrc='https://fakeimg.pl/600x400/353b38/e85115?text=TV+Show' pb={4}/>
           <Heading size='md'>
             {title}
           </Heading>

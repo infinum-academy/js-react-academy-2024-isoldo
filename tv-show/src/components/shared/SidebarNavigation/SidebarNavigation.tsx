@@ -13,7 +13,6 @@ export default function SidebarNavigation() {
   const onLogoutClick = () => {
     localStorage.setItem("register-response-headers", JSON.stringify({}));
     user.mutate(undefined, {revalidate: false});
-    router.push("/");
   };
 
   return (

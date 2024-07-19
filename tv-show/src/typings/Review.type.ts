@@ -1,6 +1,9 @@
+import { IUser } from "./User.type";
+
 export interface IReview {
-  email: string;
-  avatar?: string;
-  rating: number;
-  comment: string;
+  id: string,
+  comment: string,
+  rating: number,
+  show_id: number,
+  user: IUser
 }

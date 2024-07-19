@@ -41,10 +41,7 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   const [reviews, setReviews] = useState<IReview[]>();
   const { trigger } = useSWRMutation(swrKeys.reviews(), mutator, {
     onSuccess: ((data) => {
-      const newList: IReview[] = [ data.review, ...(reviews || [])];
-      console.log({newList});
-      // handle pagination?
-      remoteReviews.mutate({reviews: newList, meta: remoteReviews?.data?.meta || {}})
+      remoteReviews.mutate();
     })
   });
 

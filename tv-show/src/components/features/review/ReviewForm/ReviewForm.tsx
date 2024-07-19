@@ -5,11 +5,7 @@ import { useState } from "react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
 import { useUser } from "@/hooks/useUser";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
-
-interface INewReview {
-  comment: string;
-  rating: number;
-}
+import { INewReview } from "@/typings/Review.type";
 
 interface IReviewFormProps {
   onSubmit: (newReview: INewReview) => void;

@@ -7,3 +7,8 @@ export interface IReview {
   show_id: number,
   user: IUser
 }
+
+export interface INewReview {
+  comment: string;
+  rating: number;
+}

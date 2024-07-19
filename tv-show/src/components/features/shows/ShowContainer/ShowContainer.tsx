@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
 import { swrKeys } from "@/fetchers/swrKeys";
 import useSWR, { SWRResponse } from "swr";
-import { authenticatedFetcher } from "@/fetchers/fetcher";
 import { INewReview, IReview } from "@/typings/Review.type";
 import useSWRMutation from "swr/mutation";
-import { mutator } from "@/fetchers/mutators";
+import { authGet, authPost } from "@/fetchers/fetcher";
 
 interface IReviews {
   reviews: IReview[];
@@ -17,7 +16,7 @@ interface IReviews {
 }
 
 function getReviews(id: string):SWRResponse<IReviews, any> {
-  return useSWR(swrKeys.showReviews(Number(id)), authenticatedFetcher<IReviews>);
+  return useSWR(swrKeys.showReviews(Number(id)), authGet<IReviews>);
 }
 
 function calculateAverageRating(reviews: IReview[] | undefined): number | undefined {
@@ -39,7 +38,7 @@ interface IShowContainerProps {
 export default function ShowContainer({showData}: IShowContainerProps) {
   const remoteReviews = getReviews(showData.id);
   const [reviews, setReviews] = useState<IReview[]>();
-  const { trigger } = useSWRMutation(swrKeys.reviews(), mutator, {
+  const { trigger } = useSWRMutation(swrKeys.reviews(), authPost<IReview>, {
     onSuccess: ((data) => {
       remoteReviews.mutate();
     })

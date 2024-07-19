@@ -8,5 +8,6 @@ export const swrKeys = {
   top_rated: () => `${API_URL}/shows/top_rated`,
   show: (id: number) => `${API_URL}/shows/${id}`,
   showReviews: (id: number) => `${API_URL}/shows/${id}/reviews`,
-  reviews: () => `${API_URL}/reviews`
+  reviews: () => `${API_URL}/reviews`,
+  review: (id: number | string) => `${API_URL}/reviews/${id}`
 };

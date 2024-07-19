@@ -1,5 +1,4 @@
-import { fetcher } from "@/fetchers/fetcher";
-import { authMutator } from "@/fetchers/mutators";
+import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
 import { Button, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
 import Link from "next/link";
@@ -14,9 +13,10 @@ interface ILoginFormInputs {
 
 export default function LoginForm() {
   const { register, handleSubmit } = useForm<ILoginFormInputs>();
-  const { mutate } = useSWR(swrKeys.user(), fetcher);
-  const { trigger } = useSWRMutation(swrKeys.login(), authMutator, {
+  const { mutate } = useSWR(swrKeys.user(), universalFetcher);
+  const { trigger } = useSWRMutation(swrKeys.login(), loginPost, {
     onSuccess: ((data) => {
+      console.log({data})
       mutate(data, {revalidate: false});
     })
   });

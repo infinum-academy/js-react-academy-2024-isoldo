@@ -8,7 +8,7 @@ interface IReviewItemProps {
 }
 
 export default function ReviewItem(props: IReviewItemProps) {
-  const {email, avatar, rating, comment} = props.review;
+  const {user, rating, comment} = props.review;
 
   return (
     <Container>
@@ -16,8 +16,8 @@ export default function ReviewItem(props: IReviewItemProps) {
         <CardBody>
           <Stack spacing={4}>
             <Flex alignItems={'center'} margin={2}>
-              <Image src={avatar} marginRight={4}/>
-              <Box>{email}</Box>
+              <Image src={user.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
+              <Box>{user.email}</Box>
             </Flex>
             <Flex><RatingDisplay value={rating} /></Flex>
             <Flex>{comment}</Flex>

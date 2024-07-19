@@ -2,41 +2,22 @@
 import { Container } from "@chakra-ui/react";
 import ShowReviewSection from "../ShowReviewSection/ShowReviewSection";
 import { IShow } from "@/typings/Show.type";
-import { IReview } from "@/typings/Review.type";
 import { useEffect, useState } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
+import { swrKeys } from "@/fetchers/swrKeys";
+import useSWR, { SWRResponse } from "swr";
+import { authenticatedFetcher } from "@/fetchers/fetcher";
+import { INewReview, IReview } from "@/typings/Review.type";
+import useSWRMutation from "swr/mutation";
+import { mutator } from "@/fetchers/mutators";
 
 interface IReviews {
-  showId: string;
   reviews: IReview[];
+  meta: any;
 }
 
-function getReviews(id: string): IReview[] {
-  const allReviews = loadReviewsFromLocalStorage();
-
-  const reviewById = allReviews.find(review => review.showId === id);
-
-  return reviewById?.reviews || [];
-}
-
-const LOCAL_STORAGE_KEY = 'reviews';
-
-function loadReviewsFromLocalStorage(): IReviews[] {
-  const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if(!reviewsString) {
-    return [];
-  }
-  return JSON.parse(reviewsString);
-}
-
-function storeReviewsToLocalStorage(showId: string, reviews: IReview[]) {
-  const reviewsString = localStorage.getItem(LOCAL_STORAGE_KEY);
-  const reviewsObj: IReviews[] = JSON.parse(reviewsString || '[]');
-
-  const newReviews = reviewsObj.filter((reviews) => reviews.showId != showId);
-  newReviews.push({showId, reviews});
-
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newReviews));
+function getReviews(id: string):SWRResponse<IReviews, any> {
+  return useSWR(swrKeys.showReviews(Number(id)), authenticatedFetcher<IReviews>);
 }
 
 function calculateAverageRating(reviews: IReview[] | undefined): number | undefined {
@@ -56,26 +37,38 @@ interface IShowContainerProps {
 }
 
 export default function ShowContainer({showData}: IShowContainerProps) {
+  const remoteReviews = getReviews(showData.id);
   const [reviews, setReviews] = useState<IReview[]>();
+  const { trigger } = useSWRMutation(swrKeys.reviews(), mutator, {
+    onSuccess: ((data) => {
+      const newList: IReview[] = [ data.review, ...(reviews || [])];
+      console.log({newList});
+      // handle pagination?
+      remoteReviews.mutate({reviews: newList, meta: remoteReviews?.data?.meta || {}})
+    })
+  });
 
   const averageRating = calculateAverageRating(reviews);
 
-  const onSubmit = (newReview: IReview) => {
-    const newReviews = reviews ? [...reviews] : [];
-    newReviews.push(newReview);
-    storeReviewsToLocalStorage(showData.id, newReviews);
-    setReviews(newReviews);
+  const onSubmit = (newReview: INewReview) => {
+    const data = {
+      ...newReview,
+      show_id: Number(showData.id)
+    };
+    trigger(data);
   };
 
   const onRemove = (removedReview: IReview) => {
     const newReviews = reviews  && reviews.filter((review) => review != removedReview) || [];
-    storeReviewsToLocalStorage(showData.id, newReviews);
     setReviews(newReviews);
   }
 
   useEffect(() => {
-    setReviews(getReviews(showData.id));
-  }, [setReviews]);
+    if(remoteReviews.isLoading || !remoteReviews.data) {
+      return;
+    }
+    setReviews(remoteReviews.data.reviews);
+  }, [remoteReviews, setReviews]);
 
   if(!showData || !reviews) {
     return;

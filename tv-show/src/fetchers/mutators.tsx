@@ -1,9 +1,11 @@
 export async function mutator(url: string, { arg }: { arg: any }) {
+  const headers = JSON.parse(localStorage.getItem("register-response-headers") || "{}");
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(arg),
     headers: {
       'Content-Type': 'application/json',
+      ...headers
     },
   });
   if (!response.ok) {

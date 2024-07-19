@@ -15,7 +15,7 @@ interface IReviews {
   meta: any;
 }
 
-function getReviews(id: string):SWRResponse<IReviews, any> {
+function useReviews(id: string):SWRResponse<IReviews, any> {
   return useSWR(swrKeys.showReviews(Number(id)), authGet<IReviews>);
 }
 
@@ -36,7 +36,7 @@ interface IShowContainerProps {
 }
 
 export default function ShowContainer({showData}: IShowContainerProps) {
-  const remoteReviews = getReviews(showData.id);
+  const remoteReviews = useReviews(showData.id);
   const [reviews, setReviews] = useState<IReview[]>();
   const { trigger } = useSWRMutation(swrKeys.reviews(), authPost<IReview>, {
     onSuccess: ((data) => {

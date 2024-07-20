@@ -9,6 +9,8 @@ import useSWR, { SWRResponse } from "swr";
 import { INewReview, IReview } from "@/typings/Review.type";
 import useSWRMutation from "swr/mutation";
 import { authGet, authPost } from "@/fetchers/fetcher";
+import { useUser } from "@/hooks/useUser";
+import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 
 interface IReviews {
   reviews: IReview[];
@@ -36,6 +38,7 @@ interface IShowContainerProps {
 }
 
 export default function ShowContainer({showData}: IShowContainerProps) {
+  const user = useUser();
   const remoteReviews = useReviews(showData.id);
   const [reviews, setReviews] = useState<IReview[]>();
   const { trigger } = useSWRMutation(swrKeys.reviews(), authPost<IReview>, {
@@ -43,6 +46,14 @@ export default function ShowContainer({showData}: IShowContainerProps) {
       remoteReviews.mutate();
     })
   });
+
+  if(user.isLoading) {
+    return;
+  }
+
+  if(!user.data) {
+    return <ErrorBox title="Error loading user details" />
+  }
 
   const averageRating = calculateAverageRating(reviews);
 
@@ -68,7 +79,7 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   return (
     <Container>
       <ShowDetails show={showData} averageRating={averageRating} />
-      <ShowReviewSection reviews={reviews} onSubmit={onSubmit} />
+      <ShowReviewSection reviews={reviews} onSubmit={onSubmit} user={user.data.user} />
     </Container>
   )
 }

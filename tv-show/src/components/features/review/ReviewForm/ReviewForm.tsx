@@ -3,26 +3,17 @@
 import { Button, Card, CardBody, Container, Flex, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
-import { useUser } from "@/hooks/useUser";
-import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import { INewReview } from "@/typings/Review.type";
+import { IUser } from "@/typings/User.type";
 
 interface IReviewFormProps {
   onSubmit: (newReview: INewReview) => void;
+  user: IUser;
 }
 
 export default function ReviewForm({onSubmit}: IReviewFormProps) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
-  const { data, isLoading } = useUser();
-
-  if(isLoading) {
-    return;
-  }
-
-  if(!data) {
-    <ErrorBox title="User data loading error" />
-  }
 
   return(
     <Container marginBottom={4}>

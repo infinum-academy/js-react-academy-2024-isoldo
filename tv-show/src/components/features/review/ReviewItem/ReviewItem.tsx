@@ -4,9 +4,11 @@ import RatingDisplay from "../../rating/RatingDisplay/RatingDisplay";
 import useSWRMutation from "swr/mutation";
 import { swrKeys } from "@/fetchers/swrKeys";
 import { authDel } from "@/fetchers/fetcher";
+import { IUser } from "@/typings/User.type";
 
 interface IReviewItemProps {
   review: IReview;
+  user: IUser;
 }
 
 export default function ReviewItem(props: IReviewItemProps) {
@@ -14,6 +16,8 @@ export default function ReviewItem(props: IReviewItemProps) {
   const { trigger } = useSWRMutation(swrKeys.review(id), authDel, {
     throwOnError: false,
   });
+
+  const isButtonVisible = props.user.id === user.id;
 
   return (
     <Container>
@@ -26,9 +30,12 @@ export default function ReviewItem(props: IReviewItemProps) {
             </Flex>
             <Flex><RatingDisplay value={rating} /></Flex>
             <Flex>{comment}</Flex>
-            <Flex flexDir='row-reverse'>
-              <Button onClick={() => trigger()}>Remove</Button>
-            </Flex>
+            {
+              isButtonVisible &&
+              <Flex flexDir='row-reverse'>
+                <Button onClick={() => trigger()}>Remove</Button>
+              </Flex>
+            }
           </Stack>
         </CardBody>
       </Card>

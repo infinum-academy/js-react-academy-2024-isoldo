@@ -3,8 +3,9 @@ import { Box, Button, Card, CardBody, Container, Flex, Image, Stack } from "@cha
 import RatingDisplay from "../../rating/RatingDisplay/RatingDisplay";
 import useSWRMutation from "swr/mutation";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { authDel } from "@/fetchers/fetcher";
+import { authDel, authGet } from "@/fetchers/fetcher";
 import { IUser } from "@/typings/User.type";
+import useSWR from "swr";
 
 interface IReviewItemProps {
   review: IReview;
@@ -12,9 +13,11 @@ interface IReviewItemProps {
 }
 
 export default function ReviewItem(props: IReviewItemProps) {
-  const {user, rating, comment, id} = props.review;
+  const {user, rating, comment, id, show_id} = props.review;
+  const { mutate } = useSWR(swrKeys.showReviews(show_id), authGet);
   const { trigger } = useSWRMutation(swrKeys.review(id), authDel, {
     throwOnError: false,
+    onSuccess: (data) => mutate()
   });
 
   const isButtonVisible = props.user.id === user.id;

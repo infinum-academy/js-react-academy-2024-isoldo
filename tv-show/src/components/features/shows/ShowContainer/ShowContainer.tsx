@@ -54,11 +54,6 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     trigger(data);
   };
 
-  const onRemove = (removedReview: IReview) => {
-    const newReviews = reviews  && reviews.filter((review) => review != removedReview) || [];
-    setReviews(newReviews);
-  }
-
   useEffect(() => {
     if(remoteReviews.isLoading || !remoteReviews.data) {
       return;
@@ -73,7 +68,7 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   return (
     <Container>
       <ShowDetails show={showData} averageRating={averageRating} />
-      <ShowReviewSection reviews={reviews} onSubmit={onSubmit} onRemove={onRemove} />
+      <ShowReviewSection reviews={reviews} onSubmit={onSubmit} />
     </Container>
   )
 }

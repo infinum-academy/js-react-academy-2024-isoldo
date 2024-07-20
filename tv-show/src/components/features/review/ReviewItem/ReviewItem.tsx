@@ -1,14 +1,19 @@
 import { IReview } from "@/typings/Review.type";
 import { Box, Button, Card, CardBody, Container, Flex, Image, Stack } from "@chakra-ui/react";
 import RatingDisplay from "../../rating/RatingDisplay/RatingDisplay";
+import useSWRMutation from "swr/mutation";
+import { swrKeys } from "@/fetchers/swrKeys";
+import { authDel } from "@/fetchers/fetcher";
 
 interface IReviewItemProps {
   review: IReview;
-  onRemoveClick: (review: IReview) => void;
 }
 
 export default function ReviewItem(props: IReviewItemProps) {
-  const {user, rating, comment} = props.review;
+  const {user, rating, comment, id} = props.review;
+  const { trigger } = useSWRMutation(swrKeys.review(id), authDel, {
+    throwOnError: false,
+  });
 
   return (
     <Container>
@@ -22,7 +27,7 @@ export default function ReviewItem(props: IReviewItemProps) {
             <Flex><RatingDisplay value={rating} /></Flex>
             <Flex>{comment}</Flex>
             <Flex flexDir='row-reverse'>
-              <Button onClick={() => props.onRemoveClick(props.review)}>Remove</Button>
+              <Button onClick={() => trigger()}>Remove</Button>
             </Flex>
           </Stack>
         </CardBody>

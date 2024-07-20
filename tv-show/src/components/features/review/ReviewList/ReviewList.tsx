@@ -5,17 +5,15 @@ import { Flex } from "@chakra-ui/react";
 interface IReviewListProps {
   title?: string;
   reviews: IReview[];
-  onRemoveClick: (review: IReview) => void;
 }
 
-export default function ReviewList({title='Reviews', reviews, onRemoveClick}: IReviewListProps) {
+export default function ReviewList({title='Reviews', reviews}: IReviewListProps) {
   return (
       <Flex marginBottom={4} gap={4} direction="column">
         {reviews.map((review, index) => {
           return <ReviewItem
             key={index}
-            review={review}
-            onRemoveClick={onRemoveClick} />
+            review={review} />
         })}
       </Flex>
   )

@@ -12,15 +12,15 @@ interface IReviewItemProps {
   user: IUser;
 }
 
-export default function ReviewItem(props: IReviewItemProps) {
-  const {user, rating, comment, id, show_id} = props.review;
+export default function ReviewItem({ review, user }: IReviewItemProps) {
+  const {user: commentUser, rating, comment, id, show_id} = review;
   const { mutate } = useSWR(swrKeys.showReviews(show_id), authGet);
   const { trigger } = useSWRMutation(swrKeys.review(id), authDel, {
     throwOnError: false,
     onSuccess: (data) => mutate()
   });
 
-  const isButtonVisible = props.user.id === user.id;
+  const isButtonVisible = user.id === commentUser.id;
 
   return (
     <Container>
@@ -28,8 +28,8 @@ export default function ReviewItem(props: IReviewItemProps) {
         <CardBody>
           <Stack spacing={4}>
             <Flex alignItems={'center'} margin={2}>
-              <Image src={user.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
-              <Box>{user.email}</Box>
+              <Image src={commentUser.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
+              <Box>{commentUser.email}</Box>
             </Flex>
             <Flex><RatingDisplay value={rating} /></Flex>
             <Flex>{comment}</Flex>

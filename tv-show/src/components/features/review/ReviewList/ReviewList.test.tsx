@@ -6,6 +6,12 @@ import { render } from "@testing-library/react";
 
 jest.mock("@/components/features/review/ReviewItem/ReviewItem");
 
+jest.mock("@/fetchers/fetcher", () => {
+  return {
+    authGet: jest.fn().mockReturnValue(null)
+  }
+})
+
 describe("ReviewList", () => {
   it("should render ReviewItem component", () => {
     const currentUser: IUser = {

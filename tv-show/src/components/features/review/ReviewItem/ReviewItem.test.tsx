@@ -3,6 +3,12 @@ import { render, screen } from "@testing-library/react";
 import ReviewItem from "./ReviewItem";
 import { IUser } from "@/typings/User.type";
 
+jest.mock("@/fetchers/fetcher", () => {
+  return {
+    authGet: jest.fn().mockReturnValue(null)
+  }
+})
+
 describe('ReviewItem', () => {
   const id = "123";
   const show_id = 456;

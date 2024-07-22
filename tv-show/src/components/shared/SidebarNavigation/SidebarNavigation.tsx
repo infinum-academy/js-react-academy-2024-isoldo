@@ -7,7 +7,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function SidebarNavigation() {
   const colorScheme = "orange";
-  const router = useRouter();
   const user = useUser();
 
   const onLogoutClick = () => {
@@ -16,11 +15,11 @@ export default function SidebarNavigation() {
   };
 
   return (
-    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
+    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px' bg="purple">
       <VStack>
-        <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' colorScheme={colorScheme} />
-        <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' colorScheme={colorScheme} />
-        <ButtonLinkWithSelectHighlight text='My Profile' colorScheme={colorScheme} />
+        <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
+        <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
+        <ButtonLinkWithSelectHighlight text='My Profile' />
       </VStack>
       <Button colorScheme={colorScheme} variant={'solid'} onClick={onLogoutClick}>Log out</Button>
 
@@ -31,15 +30,14 @@ export default function SidebarNavigation() {
 interface IButtonLinkWithSelectHighlight {
   text: string;
   href?: string;
-  colorScheme: string;
 }
-function ButtonLinkWithSelectHighlight({text, href, colorScheme}: IButtonLinkWithSelectHighlight) {
+function ButtonLinkWithSelectHighlight({text, href}: IButtonLinkWithSelectHighlight) {
   const path = usePathname();
   const isSelectedVariant = () => {return href === path ? 'solid' : 'outline'};
 
   if(href) {
-    return <Button gap={3} as={Link} href={href} colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
+    return <Button gap={3} as={Link} href={href} variant={isSelectedVariant()}>{text}</Button>
   }
-  return <Button gap={3} colorScheme={colorScheme} variant={isSelectedVariant()}>{text}</Button>
+  return <Button gap={3} variant={isSelectedVariant()}>{text}</Button>
 
 }

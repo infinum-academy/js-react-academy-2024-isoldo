@@ -40,7 +40,6 @@ interface IShowContainerProps {
 export default function ShowContainer({showData}: IShowContainerProps) {
   const user = useUser();
   const remoteReviews = useReviews(showData.id);
-  const [reviews, setReviews] = useState<IReview[]>();
   const { trigger } = useSWRMutation(swrKeys.reviews(), authPost<IReview>, {
     onSuccess: ((data) => {
       remoteReviews.mutate();
@@ -55,8 +54,6 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     return <ErrorBox title="Error loading user details" />
   }
 
-  const averageRating = calculateAverageRating(reviews);
-
   const onSubmit = (newReview: INewReview) => {
     const data = {
       ...newReview,
@@ -69,17 +66,16 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     if(remoteReviews.isLoading || !remoteReviews.data) {
       return;
     }
-    setReviews(remoteReviews.data.reviews);
-  }, [remoteReviews, setReviews]);
+  }, [remoteReviews]);
 
-  if(!showData || !reviews) {
+  if(!showData || !remoteReviews.data?.reviews) {
     return;
   }
 
   return (
     <Container>
-      <ShowDetails show={showData} averageRating={averageRating} />
-      <ShowReviewSection reviews={reviews} onSubmit={onSubmit} user={user.data.user} />
+      <ShowDetails show={showData} averageRating={showData.average_rating} />
+      <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
     </Container>
   )
 }

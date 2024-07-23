@@ -1,15 +1,16 @@
-import { IReview } from "@/typings/Review.type";
+import { INewReview, IReview } from "@/typings/Review.type";
 import { Box, Card, CardBody, Container, Heading, Stack } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
+import { IUser } from "@/typings/User.type";
 
 interface IShowReviewSectionProps {
   reviews: IReview[];
-  onSubmit: (newReview: IReview) => void;
-  onRemove: (removedReview: IReview) => void;
+  onSubmit: (newReview: INewReview) => void;
+  user: IUser;
 }
 
-export default function ShowReviewSection({reviews, onSubmit, onRemove}: IShowReviewSectionProps) {
+export default function ShowReviewSection({reviews, onSubmit, user}: IShowReviewSectionProps) {
   return (
     <Container>
        <Heading size='md' marginBottom={4}>
@@ -19,10 +20,10 @@ export default function ShowReviewSection({reviews, onSubmit, onRemove}: IShowRe
         <CardBody>
           <Stack>
             <Box>
-              <ReviewForm onSubmit={onSubmit}/>
+              <ReviewForm onSubmit={onSubmit} user={user}/>
             </Box>
             <Box>
-              <ReviewList reviews={reviews} onRemoveClick={onRemove} />
+              <ReviewList reviews={reviews} user={user}/>
             </Box>
           </Stack>
         </CardBody>

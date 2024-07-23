@@ -1,17 +1,14 @@
-import { authenticatedFetcher } from "@/fetchers/fetcher";
+import { authGet } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
+import { IUser } from "@/typings/User.type";
 import useSWR from "swr";
 
-interface IUser {
-  user: {
-    id: string;
-    email: string;
-    image_url: string;
-  }
+interface IUserResponse {
+  user: IUser
 }
 
 export function useUser() {
-  const swrHook = useSWR(swrKeys.user(), authenticatedFetcher<IUser>, {
+  const swrHook = useSWR(swrKeys.user(), authGet<IUserResponse>, {
     onError: () => swrHook.mutate(undefined, {revalidate: false})
   });
 

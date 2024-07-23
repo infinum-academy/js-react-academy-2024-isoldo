@@ -1,40 +1,44 @@
 import { IReview } from "@/typings/Review.type";
 import { render, screen } from "@testing-library/react";
 import ReviewItem from "./ReviewItem";
+import { IUser } from "@/typings/User.type";
+
+jest.mock("@/fetchers/fetcher", () => {
+  return {
+    authGet: jest.fn().mockReturnValue(null)
+  }
+})
 
 describe('ReviewItem', () => {
-  const email = 'test@jest.js'
+  const id = "123";
+  const show_id = 456;
+  const email = 'test@jest.js';
   const rating = 3;
   const comment = 'test comment';
-  const review: IReview = { email, rating, comment };
+  const user: IUser = {
+    id: "123456",
+    email,
+    image_url: ""
+  };
+
+  const review: IReview = { id, show_id, user, rating, comment };
 
   it('should render the correct user email', () => {
-    render(<ReviewItem review={review} onRemoveClick={(review) => null}/>);
+    render(<ReviewItem review={review} user={user}/>);
 
     expect(screen.getByText(email)).toBeInTheDocument();
   });
 
   it('should render the correct comment', () => {
-    render(<ReviewItem review={review} onRemoveClick={(review) => null} />);
+    render(<ReviewItem review={review} user={user} />);
 
     expect(screen.getByText(comment)).toBeInTheDocument();
   });
 
   it('should render the delete button', () => {
-    render(<ReviewItem review={review} onRemoveClick={(review) => null} />);
+    render(<ReviewItem review={review} user={user} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByText('Remove')).toBeInTheDocument();
-  });
-
-  it('should call onRemoveClick with the current review', () => {
-    const mockOnDelete = jest.fn();
-    render(<ReviewItem review={review} onRemoveClick={mockOnDelete} />);
-
-    const removeButton = screen.getByText('Remove');
-    removeButton.click();
-
-    expect(mockOnDelete).toHaveBeenCalledTimes(1);
-    expect(mockOnDelete).toHaveBeenCalledWith(review);
   });
 });

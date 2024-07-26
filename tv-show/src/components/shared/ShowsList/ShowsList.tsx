@@ -8,10 +8,10 @@ interface IShowsListProps {
 
 export default function ShowsList({shows}: IShowsListProps) {
   return (
-      <SimpleGrid minChildWidth='240px'>
+      <SimpleGrid minChildWidth='240px' gap={8}>
       {
         shows.map((show) => { return (
-            <ShowCard key={show.id} show={show} />
+            <ShowCard key={show.id} show={show}/>
         )})
       }
       </SimpleGrid>

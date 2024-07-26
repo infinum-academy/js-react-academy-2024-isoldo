@@ -27,7 +27,7 @@ export default function LoginForm() {
 
   return (
     <Flex direction='row' justifyContent="center" alignItems="center" marginTop={10}>
-      <Flex direction='column' gap={3} alignItems="center" maxWidth="640px">
+      <Flex direction='column' gap={3} alignItems="center" maxWidth="640px" bg="purple" color="white">
         <Heading as="h2">Login</Heading>
         <Text>Log in using your credentials</Text>
         <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onLogin)}>

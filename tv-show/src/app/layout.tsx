@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import SidebarNavigation from "@/components/shared/SidebarNavigation/SidebarNavigation";
 import { Box, Flex } from "@chakra-ui/react";
 import AuthRedirectContainer from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "TV Shows App | React Course @ Infinum Academy",
@@ -19,10 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Providers>
           <AuthRedirectContainer />
-          <Flex>
+          <Flex bg="darkPurple">
             <SidebarNavigation />
             <Box flex='1' flexDir='row'>
               {children}

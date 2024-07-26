@@ -15,8 +15,8 @@ export default function SidebarNavigation() {
   };
 
   return (
-    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px' bg="purple">
-      <VStack>
+    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
+      <VStack gap={2}>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
         <ButtonLinkWithSelectHighlight text='My Profile' />
@@ -36,8 +36,8 @@ function ButtonLinkWithSelectHighlight({text, href}: IButtonLinkWithSelectHighli
   const isSelectedVariant = () => {return href === path ? 'solid' : 'outline'};
 
   if(href) {
-    return <Button gap={3} as={Link} href={href} variant={isSelectedVariant()}>{text}</Button>
+    return <Button gap={3} as={Link} href={href} textAlign="start" variant={isSelectedVariant()}>{text}</Button>
   }
-  return <Button gap={3} variant={isSelectedVariant()}>{text}</Button>
+  return <Button gap={8} variant={isSelectedVariant()}>{text}</Button>
 
 }

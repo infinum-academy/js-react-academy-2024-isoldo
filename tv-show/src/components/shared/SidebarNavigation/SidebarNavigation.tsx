@@ -1,9 +1,9 @@
 'use client';
 
 import { useUser } from "@/hooks/useUser";
-import { Button, VStack } from "@chakra-ui/react";
+import { Button, VStack, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function SidebarNavigation() {
   const colorScheme = "orange";
@@ -16,7 +16,8 @@ export default function SidebarNavigation() {
 
   return (
     <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
-      <VStack gap={2}>
+      <VStack gap={2} alignItems="start">
+        <Heading color="white"  margin={4}>TV Shows App</Heading>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
         <ButtonLinkWithSelectHighlight text='My Profile' />

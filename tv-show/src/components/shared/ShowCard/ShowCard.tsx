@@ -16,7 +16,7 @@ export default function ShowCard({show}: IShowCardProps) {
       <CardFooter>
         <Flex flexDir='column'>
           <Text>{title}</Text>
-          <Text>{average_rating}</Text>
+          <Text>{average_rating || "N/A"}</Text>
         </Flex>
       </CardFooter>
     </Card>

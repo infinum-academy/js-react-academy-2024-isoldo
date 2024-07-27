@@ -15,7 +15,7 @@ export default function SidebarNavigation() {
   };
 
   return (
-    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px'>
+    <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px' alignItems="start">
       <VStack gap={2} alignItems="start">
         <Heading color="white"  margin={4}>TV Shows App</Heading>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />

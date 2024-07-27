@@ -3,7 +3,7 @@ import { defineStyleConfig, StyleFunctionProps } from "@chakra-ui/react";
 const Button = defineStyleConfig({
   baseStyle: {
     borderRadius: "buttonRadius",
-    border: "0px",
+    border: "none",
   },
   sizes: {
     md: {
@@ -17,6 +17,7 @@ const Button = defineStyleConfig({
     solid: (props: StyleFunctionProps) => ({
       bg: "white",
       color: "purple",
+      border: "inherit",
 
       _hover: {
         bg: "lightPurple",
@@ -27,6 +28,7 @@ const Button = defineStyleConfig({
     outline: {
       bg: "darkPurple",
       color: "white",
+      border: "inherit",
 
       _hover: {
         bg: "lightPurple",

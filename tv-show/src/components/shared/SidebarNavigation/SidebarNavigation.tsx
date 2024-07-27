@@ -21,7 +21,7 @@ export default function SidebarNavigation() {
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
         <ButtonLinkWithSelectHighlight text='My Profile' />
       </VStack>
-      <Button colorScheme={colorScheme} variant={'solid'} onClick={onLogoutClick}>Log out</Button>
+      <Button variant={'outline'} onClick={onLogoutClick}>Log out</Button>
 
     </VStack>
   );

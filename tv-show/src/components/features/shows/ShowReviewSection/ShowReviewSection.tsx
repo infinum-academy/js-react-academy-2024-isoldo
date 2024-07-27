@@ -1,5 +1,5 @@
 import { INewReview, IReview } from "@/typings/Review.type";
-import { Box, Card, CardBody, Container, Heading, Stack } from "@chakra-ui/react";
+import { Box, Card, CardBody, Container, Flex, Heading, Stack } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";
 import { IUser } from "@/typings/User.type";
@@ -13,10 +13,9 @@ interface IShowReviewSectionProps {
 export default function ShowReviewSection({reviews, onSubmit, user}: IShowReviewSectionProps) {
   return (
     <Container>
-       <Heading size='md' marginBottom={4}>
-        Reviews
-      </Heading>
-      <Card variant='unstyled'>
+      <Flex gap={3} justifyContent="space-between">
+        <Heading size='md' marginBottom={4} color="white">Reviews</Heading>
+        <Card variant='unstyled'>
         <CardBody>
           <Stack>
             <Box>
@@ -28,6 +27,7 @@ export default function ShowReviewSection({reviews, onSubmit, user}: IShowReview
           </Stack>
         </CardBody>
       </Card>
+      </Flex>
     </Container>
   )
 }

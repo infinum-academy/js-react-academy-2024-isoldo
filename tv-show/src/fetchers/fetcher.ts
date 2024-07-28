@@ -24,7 +24,7 @@ export async function universalFetcher<T>(input: string | URL | Request, params?
     const response = await fetch(input, init);
 
     if(!response.ok) {
-      throw new Error(`Fetch Error: status ${response.status}`);
+      throw new Error("Response NOK", {cause: response});
     }
 
     let data;
@@ -51,7 +51,7 @@ export async function universalFetcher<T>(input: string | URL | Request, params?
     return data;
   } catch (e) {
     console.error("Error using fetch", { e, params, init});
-    throw new Error("Fetch error");
+    throw e;
   }
 }
 

@@ -1,18 +1,18 @@
 'use client';
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import { Flex, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import { PickerNavButtons } from "./components/PickerNavButtons";
 import { PickerContext } from "./components/PickerContextProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PickerShowsGrid } from "./components/PickerShowsGrid";
+import { PickerProgress } from "./components/PickerProgress";
 
 export function Picker() {
   const ctx = useContext(PickerContext);
-
-  const isFinalStep = ctx.currentStep === (ctx.stepCount-1);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Modal isOpen={true} onClose={() => null}>
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent>
           <ModalHeader>Picker</ModalHeader>
@@ -20,7 +20,10 @@ export function Picker() {
             <PickerShowsGrid/>
           </ModalBody>
           <ModalFooter>
+            <Flex direction="column" width="100%">
+            <PickerProgress />
             <PickerNavButtons />
+            </Flex>
           </ModalFooter>
       </ModalContent>
     </Modal>

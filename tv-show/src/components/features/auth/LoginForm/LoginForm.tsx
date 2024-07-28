@@ -1,3 +1,5 @@
+'use client';
+
 import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
 import { Button, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";

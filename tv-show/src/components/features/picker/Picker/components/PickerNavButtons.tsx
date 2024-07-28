@@ -11,7 +11,7 @@ export function PickerNavButtons() {
     <Flex width="100%" justifyContent="space-between">
       {
         ctx.isFinalStep(ctx.currentStep) &&
-        <Button onClick={() => console.log(ctx.selectedShows)}>Close</Button>||
+        <Button onClick={() => ctx.setIsModalOpen(false)}>Close</Button>||
           <>
           <Button isDisabled={isPrevDisabled} onClick={() => ctx.setCurrentStep(ctx.currentStep-1)}>Previous</Button>
           <Button onClick={() => ctx.setCurrentStep(ctx.currentStep+1)}>Next</Button>

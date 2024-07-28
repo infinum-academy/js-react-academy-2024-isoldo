@@ -12,7 +12,7 @@ export function Picker() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal isOpen={ctx.isModalOpen} onClose={() => ctx.setIsModalOpen(false)}>
       <ModalOverlay />
       <ModalContent>
           <ModalHeader>Picker</ModalHeader>

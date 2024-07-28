@@ -14,6 +14,8 @@ interface IPickerContext {
   setSelectedShows: (newShows: IShow[]) => void;
   shows?: IShow[];
   isFinalStep: (currentStep: number) => boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: (newState: boolean) => void;
 }
 
 export const PickerContext = createContext<IPickerContext>({} as IPickerContext);
@@ -26,13 +28,25 @@ interface IPickerContextProviderProps {
 export function PickerContextProvider({ stepCount, children }: IPickerContextProviderProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedShows, setSelectedShows] = useState<IShow[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const { data } = useSWR<{shows:IShow[]}>(swrKeys.all_shows(currentStep+1, 4), authGet);
 
   const isFinalStep = (curr: number) => curr === (stepCount-1);
 
   return (
     <PickerContext.Provider
-      value={{stepCount, currentStep, setCurrentStep, selectedShows, setSelectedShows, shows: data?.shows, isFinalStep}}
+      value={
+        {
+          stepCount,
+          currentStep,
+          setCurrentStep,
+          selectedShows,
+          setSelectedShows,
+          shows: data?.shows,
+          isFinalStep,
+          isModalOpen,
+          setIsModalOpen
+        }}
     >
       {children}
     </PickerContext.Provider>

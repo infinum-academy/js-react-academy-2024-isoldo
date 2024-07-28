@@ -2,7 +2,7 @@
 
 import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
+import { Button, Container, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import useSWR from "swr";
@@ -28,24 +28,24 @@ export default function LoginForm() {
   };
 
   return (
-    <Flex height="100vh" direction='row' justifyContent="center" alignItems="center">
-      <Flex direction='column' alignItems="center" justifyContent="center" w={[200,400,600]} bg="purple" color="white" borderRadius="26px">
-        <Container margin={8} centerContent>
-        <Heading marginBottom={8} as="h2">Login</Heading>
-        <Flex as="form" width="80%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onLogin)}>
-          <FormControl isRequired={true}>
-            <FormLabel>Email</FormLabel>
+    <Modal isCentered isOpen={true} onClose={() => null}>
+      <ModalContent alignContent="center" justifyContent="center" bg="darkPurple">
+        <Container centerContent bg="purple" borderRadius="26px">
+        <Heading marginBottom={8} as="h2" color="white">TV Show App</Heading>
+        <form onSubmit={handleSubmit(onLogin)}>
+          <FormControl isRequired>
+            <FormLabel color="white">Email</FormLabel>
             <Input {...register('email')} required type="email" />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
+            <FormLabel color="white">Password</FormLabel>
             <Input {...register('password')} required type="password" />
           </FormControl>
           <Button type="submit">Login</Button>
-          <Text>Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
-        </Flex>
-          </Container>
-      </Flex>
-    </Flex>
+          <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
+        </form>
+        </Container>
+      </ModalContent>
+    </Modal>
   )
 }

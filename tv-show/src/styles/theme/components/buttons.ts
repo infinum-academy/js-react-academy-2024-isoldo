@@ -14,7 +14,7 @@ const Button = defineStyleConfig({
   },
 
   variants: {
-    solid: (props: StyleFunctionProps) => ({
+    ghost: (props: StyleFunctionProps) => ({
       bg: "purple",
       color: "white",
       border: "inherit",

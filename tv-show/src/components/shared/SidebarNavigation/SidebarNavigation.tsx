@@ -39,7 +39,7 @@ interface IButtonLinkWithSelectHighlight {
 }
 function ButtonLinkWithSelectHighlight({text, href}: IButtonLinkWithSelectHighlight) {
   const path = usePathname();
-  const isSelectedVariant = () => {return href === path ? 'solid' : 'outline'};
+  const isSelectedVariant = () => {return href === path ? 'ghost' : 'outline'};
 
   if(href) {
     return <Button gap={3} as={Link} href={href} textAlign="start" variant={isSelectedVariant()}>{text}</Button>

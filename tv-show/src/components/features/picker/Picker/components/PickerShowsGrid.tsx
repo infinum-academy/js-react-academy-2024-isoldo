@@ -15,20 +15,18 @@ export function PickerShowsGrid() {
     )
   }
 
-  const isFinalStep = ctx.currentStep === (ctx.stepCount-1);
-
-  const shows = isFinalStep ? ctx.selectedShows : ctx.shows;
+  const shows = ctx.isFinalStep(ctx.currentStep) ? ctx.selectedShows : ctx.shows;
 
   return (
     <Flex>
-      <SimpleGrid columns={2}>
+      <SimpleGrid columns={2} gap={3}>
       {shows.map((show) => {
         const isSelected = !!ctx.selectedShows.find((s) => s === show);
         return (
             <ShowCardSelectable
               key={show.id}
               show={show}
-              isSelected={isSelected}
+              isSelected={isSelected && !ctx.isFinalStep(ctx.currentStep)}
               onClick={(show: IShow) => {
                 if(!isSelected) {
                   ctx.setSelectedShows([...ctx.selectedShows, show]);

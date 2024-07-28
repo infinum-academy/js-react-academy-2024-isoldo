@@ -9,7 +9,6 @@ import { PickerProgress } from "./components/PickerProgress";
 
 export function Picker() {
   const ctx = useContext(PickerContext);
-  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Modal isOpen={ctx.isModalOpen} onClose={() => ctx.setIsModalOpen(false)}>

@@ -6,12 +6,11 @@ export function PickerNavButtons() {
   const ctx = useContext(PickerContext);
 
   const isPrevDisabled = ctx.currentStep === 0;
-  const isFinalStep = ctx.currentStep === (ctx.stepCount-1);
 
   return (
     <Flex width="100%" justifyContent="space-between">
       {
-        isFinalStep &&
+        ctx.isFinalStep(ctx.currentStep) &&
         <Button onClick={() => console.log(ctx.selectedShows)}>Close</Button>||
           <>
           <Button isDisabled={isPrevDisabled} onClick={() => ctx.setCurrentStep(ctx.currentStep-1)}>Previous</Button>

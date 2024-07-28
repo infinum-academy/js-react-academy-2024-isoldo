@@ -8,6 +8,10 @@ const AUTH_NOT_REQUIRED_PATHS = [
   "/register"
 ];
 
+export function isNavigationShown(path: string) {
+  return !AUTH_NOT_REQUIRED_PATHS.includes(path);
+}
+
 export default function AuthRedirectContainer() {
   const path = usePathname();
 

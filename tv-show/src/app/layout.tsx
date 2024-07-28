@@ -21,7 +21,7 @@ export default function RootLayout({
           <AuthRedirectContainer />
           <Flex bg="darkPurple">
             <SidebarNavigation />
-            <Box flex='1' flexDir='row'>
+            <Box flex='1' flexDir='row' minHeight="100vh">
               {children}
             </Box>
           </Flex>

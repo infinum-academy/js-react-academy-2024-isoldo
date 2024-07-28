@@ -1,18 +1,23 @@
 'use client';
 
+import { isNavigationShown } from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
 import { useUser } from "@/hooks/useUser";
 import { Button, VStack, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function SidebarNavigation() {
-  const colorScheme = "orange";
+  const path = usePathname();
   const user = useUser();
 
   const onLogoutClick = () => {
     localStorage.setItem("register-response-headers", JSON.stringify({}));
     user.mutate(undefined, {revalidate: false});
   };
+
+  if(!isNavigationShown(path)) {
+    return null;
+  }
 
   return (
     <VStack h='100vh' justifyContent='space-between' position='sticky' top='0px' alignItems="start">

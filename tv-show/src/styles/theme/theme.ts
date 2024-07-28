@@ -4,6 +4,7 @@ import "@fontsource/roboto/700.css";
 import Button from "./components/buttons";
 import radii from "./foundations/radii";
 import Card from "./components/cards";
+import Input from "./components/inputs";
 
 const colors = {
   white: "#ffffff",
@@ -21,7 +22,8 @@ const fonts = {
 const theme = extendTheme({
   components: {
     Button,
-    Card
+    Card,
+    Input
   },
   colors,
   fonts,

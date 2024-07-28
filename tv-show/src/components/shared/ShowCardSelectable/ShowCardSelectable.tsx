@@ -11,7 +11,7 @@ export default function ShowCardSelectable({show, onClick, isSelected=false}: IS
   const {image_url, title, average_rating} = show;
   return (
     <Card>
-      <CardBody as={Button} onClick={() => onClick(show)} background={isSelected ? "green" : "white"}>
+      <CardBody onClick={() => onClick(show)} background={isSelected ? "green" : "white"} minW="100px">
         <Flex flexDir='column'>
           <Image src={image_url} objectFit='cover' boxSize='200px'/>
           <Text>{title}</Text>

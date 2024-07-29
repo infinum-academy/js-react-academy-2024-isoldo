@@ -2,7 +2,7 @@
 
 import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { Button, Container, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Text } from "@chakra-ui/react";
+import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import useSWR from "swr";
@@ -29,21 +29,25 @@ export default function LoginForm() {
 
   return (
     <Modal isCentered isOpen={true} onClose={() => null}>
-      <ModalContent alignContent="center" justifyContent="center" bg="darkPurple">
-        <Container centerContent bg="purple" borderRadius="26px">
-        <Heading marginBottom={8} as="h2" color="white">TV Show App</Heading>
-        <form onSubmit={handleSubmit(onLogin)}>
-          <FormControl isRequired>
-            <FormLabel color="white">Email</FormLabel>
-            <Input {...register('email')} required type="email" />
-          </FormControl>
-          <FormControl>
-            <FormLabel color="white">Password</FormLabel>
-            <Input {...register('password')} required type="password" />
-          </FormControl>
-          <Button type="submit">Login</Button>
-          <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
-        </form>
+      <ModalContent bg="darkPurple">
+        <Container centerContent w="500px" h="500px">
+          <Flex direction="column" justifyContent="center" h="100%">
+            <Heading marginBottom={8} as="h2" color="white">TV Show App</Heading>
+            <Flex as="form" direction="column" gap={3} onSubmit={handleSubmit(onLogin)}>
+              <FormControl isRequired>
+                <FormLabel color="white">Email</FormLabel>
+                <Input {...register('email')} required type="email" />
+              </FormControl>
+              <FormControl>
+                <FormLabel color="white">Password</FormLabel>
+                <Input {...register('password')} required type="password" />
+              </FormControl>
+              <Container centerContent>
+                <Button width="fit-content" type="submit">Login</Button>
+              </Container>
+              <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
+            </Flex>
+          </Flex>
         </Container>
       </ModalContent>
     </Modal>

@@ -25,6 +25,16 @@ const Button = defineStyleConfig({
       },
     }),
 
+    solid: {
+      bg: "white",
+      color: "purple",
+
+      _hover: {
+        bg: "darkPurple",
+        color: "white"
+      }
+    },
+
     outline: {
       bg: "darkPurple",
       color: "white",

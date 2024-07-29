@@ -37,7 +37,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
               name="rating"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <RatingInput
-                  label="rating-label"
+                  label="Rating"
                   onChange={onChange}
                   value={value}
                 />

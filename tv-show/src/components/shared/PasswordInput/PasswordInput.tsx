@@ -1,7 +1,7 @@
 'use client';
 
-import { LockIcon } from "@chakra-ui/icons";
-import { Button, Input, InputGroup, InputLeftElement, InputProps } from "@chakra-ui/react";
+import { LockIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { IconButton, Input, InputGroup, InputLeftElement, InputProps, InputRightElement } from "@chakra-ui/react";
 import { forwardRef, useState } from "react";
 
 interface IPasswordInputProps extends InputProps {
@@ -13,10 +13,13 @@ export const PasswordInput = forwardRef(({ showOption, ...inputProps }: IPasswor
 
   return (
     <InputGroup>
-      <InputLeftElement><LockIcon /></InputLeftElement>
+      <InputLeftElement><LockIcon color="white"/></InputLeftElement>
       <Input ref={ref} type={show ? 'text' : 'password'} {...inputProps}/>
       {
-        showOption && <Button onClick={() => setShow(!show)}>{`${show ? "Hide" : "Show"}`}</Button>
+        showOption &&
+        <InputRightElement>
+          <IconButton size="sm" variant="ghost" aria-label="password" icon={show ? <ViewOffIcon /> : <ViewIcon />} onClick={() => setShow(!show)}>{`${show ? "Hide" : "Show"}`}</IconButton>
+        </InputRightElement>
       }
     </InputGroup>
   )

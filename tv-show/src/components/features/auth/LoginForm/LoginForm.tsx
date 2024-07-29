@@ -57,16 +57,16 @@ function LoginFormInner() {
       <Flex direction="column" justifyContent="center" h="100%">
         <Heading marginBottom={8} as="h2" textAlign="center">TV Show App</Heading>
         <Flex as="form" direction="column" gap={3} onSubmit={handleSubmit(onLogin)}>
-          <FormControl isRequired>
+          <FormControl isRequired isDisabled={isMutating}>
             <FormLabel color="white">Email</FormLabel>
             <Input {...register('email')} required type="email" />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired isDisabled={isMutating}>
             <FormLabel color="white">Password</FormLabel>
             <PasswordInput {...register('password')} isInvalid={unauth} onFocus={() => setUnauth(false)} showOption={true}/>
           </FormControl>
           <Container centerContent>
-            <Button width="fit-content" type="submit">Login</Button>
+            <Button isDisabled={isMutating} type="submit">{isMutating ? <Spinner /> : "Login"}</Button>
           </Container>
           <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
         </Flex>

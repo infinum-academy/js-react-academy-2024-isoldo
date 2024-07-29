@@ -44,6 +44,25 @@ const Button = defineStyleConfig({
         bg: "lightPurple",
         color: "white",
       },
+    },
+
+    "rating": {
+      bg: "darkPurple",
+      color: "lightPurple",
+
+      _hover: {
+        bg: "darkPurple"
+      }
+    },
+
+    "ratingSelected": {
+      bg: "darkPurple",
+      color: "white",
+
+      _hover: {
+        bg: "darkPurple",
+        color: "white"
+      }
     }
   },
 });

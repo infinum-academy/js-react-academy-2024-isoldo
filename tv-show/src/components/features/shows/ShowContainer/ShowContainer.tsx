@@ -2,7 +2,7 @@
 import { Container } from "@chakra-ui/react";
 import ShowReviewSection from "../ShowReviewSection/ShowReviewSection";
 import { IShow } from "@/typings/Show.type";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
 import { swrKeys } from "@/fetchers/swrKeys";
 import useSWR, { SWRResponse } from "swr";
@@ -73,7 +73,7 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   }
 
   return (
-    <Container>
+    <Container bg="darkPurple" maxWidth="800px">
       <ShowDetails show={showData} averageRating={showData.average_rating} />
       <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
     </Container>

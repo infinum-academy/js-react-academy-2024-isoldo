@@ -16,15 +16,15 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
   const [rating, setRating] = useState(0);
 
   return(
-    <Container marginBottom={4}>
+    <Container bg="darkPurple" marginBottom={4}>
       <Card>
-        <CardBody>
+        <CardBody bg="darkPurple">
           <Textarea
             placeholder='What did you think of the show?'
             onBlur={(e) => setComment(e.target.value)}
           />
-          <RatingInput label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
           <Flex justifyContent='flex-end'>
+          <RatingInput label='Rating' onChange={(n: number) => setRating(n)} value={rating}/>
             <Button onClick={() => {
               const newReview: INewReview = {
                 comment,
@@ -33,7 +33,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
               setRating(0);
               setComment('');
               onSubmit(newReview);
-            }}>Submit review</Button>
+            }}>Post</Button>
           </Flex>
         </CardBody>
       </Card>

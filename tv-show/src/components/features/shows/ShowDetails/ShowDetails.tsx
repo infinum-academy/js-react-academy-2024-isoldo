@@ -18,7 +18,7 @@ export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
   const averageRatingText = getAverageRatingText(averageRating);
 
   return (
-    <Container>
+    <Container bg="darkPurple">
       <Card marginBottom={8}>
         <CardHeader padding="0">
           <Image src={image_url} fallbackSrc='https://fakeimg.pl/600x400/353b38/e85115?text=TV+Show' pb={4}/>

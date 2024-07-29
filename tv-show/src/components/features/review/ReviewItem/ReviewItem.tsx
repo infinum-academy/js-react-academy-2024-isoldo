@@ -23,8 +23,8 @@ export default function ReviewItem({ review, user }: IReviewItemProps) {
   const isButtonVisible = user.id === commentUser.id;
 
   return (
-    <Container>
-      <Card>
+    <Container bg="darkPurple">
+      <Card bg="purple">
         <CardBody>
           <Stack spacing={4}>
             <Flex alignItems={'center'} margin={2}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import RatingIcon from "../RatingIcon/RatingIcon";
 
@@ -17,7 +17,9 @@ export default function RatingInput({label, onChange, value}: IRatingProps) {
   useEffect(() => setHoverRating(value), [value, setHoverRating]);
 
   return (
-    <Container>
+    <Flex bg="darkPurple" justifyContent="space-between">
+      <Text color="white">{label}</Text>
+      <Flex>
       {
         [...Array(maxRating)].map((currentRating, index) => {
           return (
@@ -32,6 +34,7 @@ export default function RatingInput({label, onChange, value}: IRatingProps) {
           )
         })
       }
-    </Container>
+      </Flex>
+    </Flex>
   )
 }

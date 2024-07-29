@@ -12,11 +12,11 @@ interface IShowReviewSectionProps {
 
 export default function ShowReviewSection({reviews, onSubmit, user}: IShowReviewSectionProps) {
   return (
-    <Container>
-      <Flex gap={3} justifyContent="space-between">
+    <Flex bg="darkPurple" >
+      <Flex gap={3} justifyContent="space-between" flexGrow={1}>
         <Heading size='md' marginBottom={4} color="white">Reviews</Heading>
         <Card variant='unstyled'>
-        <CardBody>
+        <CardBody bg="darkPurple" flexGrow={2}>
           <Stack>
             <Box>
               <ReviewForm onSubmit={onSubmit} user={user}/>
@@ -28,6 +28,6 @@ export default function ShowReviewSection({reviews, onSubmit, user}: IShowReview
         </CardBody>
       </Card>
       </Flex>
-    </Container>
+    </Flex>
   )
 }

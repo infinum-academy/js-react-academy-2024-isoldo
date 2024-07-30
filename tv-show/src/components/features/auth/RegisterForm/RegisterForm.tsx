@@ -87,7 +87,7 @@ function RegisterFormInner() {
           <PasswordInput {...register('password_confirmation')} onFocus={clearErrors} isInvalid={!!passwordMismatch || unprocessable} showOption={true}/>
         </FormControl>
         <Button isDisabled={isRegisterButtonDisabled} isLoading={isMutating} type="submit">SIGN UP</Button>
-        {errors.length && <Text color="error">{errors[0]}</Text>}
+        {!!errors.length && <Text color="error">{errors[0]}</Text>}
         {passwordMismatch && <Text color="error">Passwords do not match</Text>}
         <Text color="white">Already have an account? <Link href="/login"><b>Login</b></Link></Text>
       </Flex>

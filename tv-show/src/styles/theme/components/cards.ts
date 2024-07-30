@@ -4,6 +4,9 @@ const Card = defineStyleConfig({
   baseStyle: {
     borderRadius: "cardRadius",
     border: "0px",
+    body: {
+      color: "white"
+    }
   },
   sizes: {
     lg: {

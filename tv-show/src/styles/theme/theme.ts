@@ -21,6 +21,13 @@ const fonts = {
 }
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        color: "white"
+      }
+    }
+  },
   components: {
     Button,
     Card,

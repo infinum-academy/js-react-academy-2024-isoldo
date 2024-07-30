@@ -14,7 +14,7 @@ export default function RatingDisplay({ value }: IRatingDisplayProps) {
           return (
             <StarIcon
               key={index}
-              color={value > index ? 'black' : 'beige'}
+              color={value > index ? 'white' : 'purple'}
             />
           )
         })

@@ -66,7 +66,7 @@ function LoginFormInner() {
             <PasswordInput {...register('password')} isInvalid={unauth} onFocus={() => setUnauth(false)} showOption={true}/>
           </FormControl>
           <Container centerContent>
-            <Button isDisabled={isMutating} type="submit">{isMutating ? <Spinner /> : "Login"}</Button>
+          <Button isLoading={isMutating} type="submit">Login</Button>
           </Container>
           <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
         </Flex>

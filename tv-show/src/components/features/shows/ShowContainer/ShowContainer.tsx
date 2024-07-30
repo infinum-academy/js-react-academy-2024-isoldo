@@ -1,4 +1,6 @@
 'use client';
+
+import { Flex } from "@chakra-ui/react";
 import ShowReviewSection from "../ShowReviewSection/ShowReviewSection";
 import { IShow } from "@/typings/Show.type";
 import ShowDetails from "../ShowDetails/ShowDetails";
@@ -9,7 +11,6 @@ import useSWRMutation from "swr/mutation";
 import { authGet, authPost } from "@/fetchers/fetcher";
 import { useUser } from "@/hooks/useUser";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
-import { Flex } from "@chakra-ui/react";
 
 interface IReviews {
   reviews: IReview[];

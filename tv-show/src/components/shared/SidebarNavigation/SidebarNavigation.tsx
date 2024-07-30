@@ -1,11 +1,18 @@
 'use client';
 
-import { isNavigationShown } from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
 import { useUser } from "@/hooks/useUser";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { Button, VStack, Heading, Show, Flex, Drawer, useDisclosure, DrawerOverlay, DrawerContent, IconButton, Text, Stack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+export function isNavigationShown(path: string) {
+  const noSidebarPaths = [
+    "/login",
+    "/register"
+  ]
+  return !noSidebarPaths.includes(path);
+}
 
 export default function SidebarNavigation() {
   const path = usePathname();

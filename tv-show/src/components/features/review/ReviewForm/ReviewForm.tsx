@@ -23,6 +23,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
             bg="white"
             _placeholder={{color: "lightPurple", opacity: 1}}
             placeholder='Enter review'
+            color="darkPurple"
             onBlur={(e) => setComment(e.target.value)}
           />
           <Flex justifyContent='space-between' flexGrow={1}>

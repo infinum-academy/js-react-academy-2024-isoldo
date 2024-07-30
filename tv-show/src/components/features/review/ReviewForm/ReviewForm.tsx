@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, CardBody, Container, Flex, Textarea } from "@chakra-ui/react";
+import { Button, Flex, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
 import { INewReview } from "@/typings/Review.type";
@@ -16,28 +16,27 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
   const [rating, setRating] = useState(0);
 
   return(
-    <Flex bg="darkPurple" direction="column" marginBottom={4} flexGrow={1} id="review-form">
-
-          <Textarea
-            borderRadius="26px"
-            bg="white"
-            _placeholder={{color: "lightPurple", opacity: 1}}
-            placeholder='Enter review'
-            color="darkPurple"
-            onBlur={(e) => setComment(e.target.value)}
-          />
-          <Flex justifyContent='space-between' flexGrow={1}>
-            <RatingInput label='Rating' onChange={(n: number) => setRating(n)} value={rating}/>
-            <Button onClick={() => {
-              const newReview: INewReview = {
-                comment,
-                rating,
-              };
-              setRating(0);
-              setComment('');
-              onSubmit(newReview);
-              }}>Post</Button>
-          </Flex>
+    <Flex bg="darkPurple" direction="column" marginBottom={4} gap={3} flexGrow={1} id="review-form">
+      <Textarea
+        borderRadius="26px"
+        bg="white"
+        _placeholder={{color: "lightPurple", opacity: 1}}
+        placeholder='Enter review'
+        color="darkPurple"
+        onBlur={(e) => setComment(e.target.value)}
+      />
+      <Flex justifyContent='space-between' alignItems="baseline" flexGrow={1} className="review-form-rating-row">
+        <RatingInput label='Rating' onChange={(n: number) => setRating(n)} value={rating}/>
+        <Button onClick={() => {
+          const newReview: INewReview = {
+            comment,
+            rating,
+          };
+          setRating(0);
+          setComment('');
+          onSubmit(newReview);
+          }}>Post</Button>
+      </Flex>
     </Flex>
   )
 }

@@ -27,11 +27,14 @@ export default function ReviewItem({ review, user }: IReviewItemProps) {
         <Flex alignItems={'center'} margin={2} className="review-item-avatar">
           <Image src={commentUser.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
         </Flex>
-        <Flex width="30%" direction="column" marginRight={3} className="review-item-user-and-rating">
+        <Flex width="30%" direction="column" marginRight={3} justifyContent="center" className="review-item-user-and-rating">
           <Text overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis"><b>{commentUser.email}</b></Text>
-          <RatingDisplay value={rating} />
+          <Flex gap={2}>
+            <Text>{rating}/5</Text>
+            <RatingDisplay value={rating} />
+          </Flex>
         </Flex>
-        <Flex className="review-item-comment">
+        <Flex className="review-item-comment" alignItems="center">
           {comment}
         </Flex>
         {

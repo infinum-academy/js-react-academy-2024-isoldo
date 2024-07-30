@@ -33,14 +33,6 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     })
   });
 
-  if(user.isLoading) {
-    return;
-  }
-
-  if(!user.data) {
-    return <ErrorBox title="Error loading user details" />
-  }
-
   const onSubmit = (newReview: INewReview) => {
     // TODO remove magic numbers
     if (!newReview.comment || newReview.rating < 1 || newReview.rating > 5) {
@@ -52,6 +44,14 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     };
     trigger(data);
   };
+
+  if(user.isLoading) {
+    return;
+  }
+
+  if(!user.data) {
+    return <ErrorBox title="Error loading user details" />
+  }
 
   if(!showData || !remoteReviews.data?.reviews) {
     return;

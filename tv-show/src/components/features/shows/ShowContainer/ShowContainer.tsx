@@ -73,9 +73,11 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   }
 
   return (
-    <Container bg="darkPurple" maxWidth="800px">
-      <ShowDetails show={showData} averageRating={showData.average_rating} />
-      <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
-    </Container>
+    <Flex justifyContent="center">
+      <Flex bg="darkPurple" direction="column" justifyContent="center" id="details-and-review">
+        <ShowDetails show={showData} averageRating={showData.average_rating} />
+        <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
+      </Flex>
+    </Flex>
   )
 }

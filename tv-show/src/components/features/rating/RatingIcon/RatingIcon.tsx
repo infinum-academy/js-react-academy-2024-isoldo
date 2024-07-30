@@ -12,6 +12,7 @@ interface IRatingIconProps {
 export default function RatingIcon({index, hoverRating, onMouseEnter, onMouseLeave, onClick}: IRatingIconProps) {
   return (
     <IconButton
+      size="sm"
       aria-label={'rating-'+index}
       icon={<StarIcon />}
       variant={(hoverRating >= index) ? 'ratingSelected' : 'rating'}

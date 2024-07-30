@@ -17,9 +17,9 @@ export default function RatingInput({label, onChange, value}: IRatingProps) {
   useEffect(() => setHoverRating(value), [value, setHoverRating]);
 
   return (
-    <Flex bg="darkPurple" justifyContent="space-between">
+    <Flex bg="darkPurple" justifyContent="space-between" id="rating-input">
       <Text color="white">{label}</Text>
-      <Flex>
+      <Flex justifyContent="flex-start">
       {
         [...Array(maxRating)].map((currentRating, index) => {
           return (

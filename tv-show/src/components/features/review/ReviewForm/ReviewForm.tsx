@@ -12,13 +12,17 @@ interface IReviewFormProps {
 }
 
 export default function ReviewForm({onSubmit}: IReviewFormProps) {
-  const {register, handleSubmit, control, setValue, formState: {isSubmitting}} = useForm<INewReview>();
+  const {register, handleSubmit, control, setValue, formState: {isSubmitting}, watch} = useForm<INewReview>();
 
   const onRate = (data: INewReview) => {
     onSubmit(data);
     setValue("rating", 0);
     setValue("comment", "");
   };
+
+  const rating = watch("rating");
+  const comment = watch("comment");
+  const isDataIncomplete = !rating || !comment;
 
   return(
     <Flex bg="darkPurple" direction="column" marginBottom={4} gap={3} flexGrow={1} id="review-form">
@@ -42,7 +46,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
                   value={value}
                 />
               )} />
-            <Button isDisabled={isSubmitting} type="submit">Post</Button>
+            <Button isDisabled={isDataIncomplete || isSubmitting} type="submit">Post</Button>
           </Flex>
       </form>
     </Flex>

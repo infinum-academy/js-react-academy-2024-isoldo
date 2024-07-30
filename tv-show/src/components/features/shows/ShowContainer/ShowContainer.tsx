@@ -42,6 +42,10 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   }
 
   const onSubmit = (newReview: INewReview) => {
+    // TODO remove magic numbers
+    if (!newReview.comment || newReview.rating < 1 || newReview.rating > 5) {
+      return;
+    }
     const data = {
       ...newReview,
       show_id: Number(showData.id)

@@ -1,9 +1,10 @@
 'use client';
 
-import { authPost, universalFetcher } from "@/fetchers/fetcher";
+import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
+import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
 import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Link, Modal, ModalContent, Show, Text } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
@@ -32,12 +33,26 @@ interface IRegisterFormInputs {
 }
 
 function RegisterFormInner() {
-  const [pwMismatchError, setPwMismatchError] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [unprocessable, setUnprocessable] = useState(false);
   const { register, watch, handleSubmit } = useForm<IRegisterFormInputs>();
   const { mutate } = useSWR(swrKeys.user(), universalFetcher);
-  const { trigger } = useSWRMutation(swrKeys.register(), authPost, {
+  const { trigger, isMutating } = useSWRMutation(swrKeys.register(), loginPost, {
+    throwOnError: false,
     onSuccess: ((data) => {
+      console.log({data})
       mutate(data, {revalidate: false});
+    }),
+    onError: (async (data) => {
+      if(422 === data.cause?.status) {
+        setUnprocessable(true);
+        try {
+          const msg = await data.cause.json();
+          setErrors(msg.errors);
+        } catch (e) {
+
+        }
+      }
     })
   });
 
@@ -45,32 +60,35 @@ function RegisterFormInner() {
     trigger(data);
   };
 
+  const clearErrors = () => {
+    setUnprocessable(false);
+    setErrors([]);
+  }
+
   const password = watch("password");
   const passwordConfirmation = watch("password_confirmation");
   const isRegisterButtonDisabled = password !== passwordConfirmation || !passwordConfirmation;
-
-  useEffect(() => {
-    setPwMismatchError(password !== passwordConfirmation);
-  }, [password, passwordConfirmation, setPwMismatchError, pwMismatchError]);
+  const passwordMismatch = password && passwordConfirmation && (password !== passwordConfirmation);
 
   return (
     <Flex direction="column" justifyContent="center" h="100%">
       <Heading as="h2" textAlign="center" marginBottom={8}>TV Shows App</Heading>
       <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onRegister)}>
-        <FormControl isRequired={true}>
+        <FormControl isRequired={true} isDisabled={isMutating}>
           <FormLabel>Email</FormLabel>
           <Input {...register('email')} required type="email" />
         </FormControl>
-        <FormControl>
+        <FormControl isRequired isDisabled={isMutating}>
           <FormLabel>Password</FormLabel>
-          <Input {...register('password')} required type="password" />
+          <PasswordInput {...register('password')} onFocus={clearErrors} isInvalid={unprocessable} showOption={true}/>
         </FormControl>
-        <FormControl>
+        <FormControl isRequired isDisabled={isMutating}>
           <FormLabel>Confirm password</FormLabel>
-          <Input {...register('password_confirmation')} required type="password" />
+          <PasswordInput {...register('password_confirmation')} onFocus={clearErrors} isInvalid={!!passwordMismatch || unprocessable} showOption={true}/>
         </FormControl>
-        {pwMismatchError && <Text color="red">Passwords do not match</Text>}
-        <Button isDisabled={isRegisterButtonDisabled} type="submit">Register</Button>
+        <Button isDisabled={isRegisterButtonDisabled} isLoading={isMutating} type="submit">SIGN UP</Button>
+        {errors.length && <Text color="error">{errors[0]}</Text>}
+        {passwordMismatch && <Text color="error">Passwords do not match</Text>}
         <Text color="white">Already have an account? <Link href="/login"><b>Login</b></Link></Text>
       </Flex>
     </Flex>

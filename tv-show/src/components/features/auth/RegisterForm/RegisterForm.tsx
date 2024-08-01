@@ -2,11 +2,28 @@
 
 import { authPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { Button, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Link, Modal, ModalContent, Show, Text } from "@chakra-ui/react";
+import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
+
+export default function RegisterForm() {
+  return(
+    <>
+    <Show above="md">
+      <DesktopWrapper>
+        <RegisterFormInner />
+      </DesktopWrapper>
+    </Show>
+    <Show below="md">
+      <MobileWrapper>
+        <RegisterFormInner />
+      </MobileWrapper>
+    </Show>
+  </>
+  )
+}
 
 interface IRegisterFormInputs {
   email: string;
@@ -14,7 +31,7 @@ interface IRegisterFormInputs {
   password_confirmation: string;
 }
 
-export default function RegisterForm() {
+function RegisterFormInner() {
   const [pwMismatchError, setPwMismatchError] = useState(false);
   const { register, watch, handleSubmit } = useForm<IRegisterFormInputs>();
   const { mutate } = useSWR(swrKeys.user(), universalFetcher);
@@ -37,27 +54,45 @@ export default function RegisterForm() {
   }, [password, passwordConfirmation, setPwMismatchError, pwMismatchError]);
 
   return (
-    <Flex direction='row' justifyContent="center" alignItems="center" marginTop={10}>
-      <Flex direction='column' gap={3} alignItems="center" maxWidth="640px">
-        <Heading as="h2">Register</Heading>
-        <Text>Log in using your credentials</Text>
-        <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onRegister)}>
-          <FormControl isRequired={true}>
-            <FormLabel>Email</FormLabel>
-            <Input {...register('email')} required type="email" />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input {...register('password')} required type="password" />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Confirm password</FormLabel>
-            <Input {...register('password_confirmation')} required type="password" />
-          </FormControl>
-          {pwMismatchError && <Text color="red">Passwords do not match</Text>}
-          <Button isDisabled={isRegisterButtonDisabled} type="submit">Register</Button>
-        </Flex>
+    <Flex direction="column" justifyContent="center" h="100%">
+      <Heading as="h2" textAlign="center" marginBottom={8}>TV Shows App</Heading>
+      <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onRegister)}>
+        <FormControl isRequired={true}>
+          <FormLabel>Email</FormLabel>
+          <Input {...register('email')} required type="email" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input {...register('password')} required type="password" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Confirm password</FormLabel>
+          <Input {...register('password_confirmation')} required type="password" />
+        </FormControl>
+        {pwMismatchError && <Text color="red">Passwords do not match</Text>}
+        <Button isDisabled={isRegisterButtonDisabled} type="submit">Register</Button>
+        <Text color="white">Already have an account? <Link href="/login"><b>Login</b></Link></Text>
       </Flex>
+    </Flex>
+  )
+}
+
+function DesktopWrapper({children}: {children: ReactNode}) {
+  return (
+    <Modal isCentered isOpen={true} onClose={() => null}>
+      <ModalContent bg="darkPurple">
+        <Container centerContent w="500px" h="500px">
+          {children}
+        </Container>
+      </ModalContent>
+    </Modal>
+  )
+}
+
+function MobileWrapper({children}: {children: ReactNode}) {
+  return (
+    <Flex bg="purple" h="100vh" justifyContent="center">
+      {children}
     </Flex>
   )
 }

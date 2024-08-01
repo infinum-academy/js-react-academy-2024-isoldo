@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 import SidebarNavigation from "@/components/shared/SidebarNavigation/SidebarNavigation";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Show } from "@chakra-ui/react";
 import AuthRedirectContainer from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
 
 export const metadata: Metadata = {
@@ -19,13 +19,39 @@ export default function RootLayout({
       <body>
         <Providers>
           <AuthRedirectContainer />
-          <Flex bg="darkPurple">
-            <SidebarNavigation />
-            <Box flex='1' flexDir='row' minHeight="100vh">
+          <Show above="md">
+            <DesktopLayout>
               {children}
-            </Box>
-          </Flex>
+            </DesktopLayout>
+          </Show>
+          <Show below="md">
+            <MobileLayout>
+              {children}
+            </MobileLayout>
+          </Show>
         </Providers></body>
     </html>
   );
+}
+
+function DesktopLayout({children}: {children: React.ReactNode}) {
+  return (
+    <Flex bg="darkPurple">
+      <SidebarNavigation />
+      <Box flex='1' flexDir='row' minHeight="100vh">
+        {children}
+      </Box>
+    </Flex>
+  )
+}
+
+function MobileLayout({children}: {children: React.ReactNode}) {
+  return (
+    <Flex bg="darkPurple" direction="column">
+      <SidebarNavigation />
+      <Box flex='1' flexDir='row' minHeight="100vh">
+        {children}
+      </Box>
+    </Flex>
+  )
 }

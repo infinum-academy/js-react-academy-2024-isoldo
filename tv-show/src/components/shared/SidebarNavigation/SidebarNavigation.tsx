@@ -58,14 +58,14 @@ function MobileSidebarNav({title, onLogoutClick}: ISidenavProps) {
   return (
     <Flex padding={3} justifyContent="space-between">
       <Heading>{title}</Heading>
-      <IconButton icon={<HamburgerIcon />} onClick={onOpen} aria-label="open-menu-button" />
+      <IconButton variant="outline" icon={<HamburgerIcon />} onClick={onOpen} aria-label="open-menu-button" />
       <Drawer isOpen={isOpen} onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent bg="purple">
           <Flex padding={3} direction="column" justifyContent="space-between" flexGrow={1}>
             <Stack>
               <Flex justifyContent="flex-end">
-                <IconButton icon={<CloseIcon />} onClick={onClose} aria-label="close-menu-button" />
+                <IconButton variant="ghost" icon={<CloseIcon />} onClick={onClose} aria-label="close-menu-button" />
               </Flex>
               <Link onClick={onClose} href="/all-shows">All shows</Link>
               <Link onClick={onClose} href="/top-rated">Top rated</Link>

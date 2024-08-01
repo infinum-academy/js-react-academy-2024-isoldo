@@ -10,8 +10,8 @@ export default function ShowCard({show}: IShowCardProps) {
   const {id, image_url, title, average_rating} = show;
   return (
     <Card as={Link} href={`/all-shows/${id}`}>
-      <CardBody padding="0">
-          <Image src={image_url} height="100%" objectFit="cover"/>
+      <CardBody bg="darkPurple" padding="0">
+          <Image borderTopRadius="26px" src={image_url} height="100%" objectFit="cover"/>
       </CardBody>
       <CardFooter>
         <Flex flexDir='column'>

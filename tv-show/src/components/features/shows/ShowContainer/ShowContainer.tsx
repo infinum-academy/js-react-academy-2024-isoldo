@@ -1,8 +1,6 @@
 'use client';
-import { Container } from "@chakra-ui/react";
 import ShowReviewSection from "../ShowReviewSection/ShowReviewSection";
 import { IShow } from "@/typings/Show.type";
-import { useEffect } from "react";
 import ShowDetails from "../ShowDetails/ShowDetails";
 import { swrKeys } from "@/fetchers/swrKeys";
 import useSWR, { SWRResponse } from "swr";
@@ -11,6 +9,7 @@ import useSWRMutation from "swr/mutation";
 import { authGet, authPost } from "@/fetchers/fetcher";
 import { useUser } from "@/hooks/useUser";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
+import { Flex } from "@chakra-ui/react";
 
 interface IReviews {
   reviews: IReview[];
@@ -19,18 +18,6 @@ interface IReviews {
 
 function useReviews(id: string):SWRResponse<IReviews, any> {
   return useSWR(swrKeys.showReviews(Number(id)), authGet<IReviews>);
-}
-
-function calculateAverageRating(reviews: IReview[] | undefined): number | undefined {
-  if(!reviews?.length) {
-    return undefined;
-  }
-
-  let averageRating = 0;
-  reviews.forEach(review => averageRating += review.rating);
-  averageRating /= reviews.length;
-
-  return averageRating;
 }
 
 interface IShowContainerProps {
@@ -61,12 +48,6 @@ export default function ShowContainer({showData}: IShowContainerProps) {
     };
     trigger(data);
   };
-
-  useEffect(() => {
-    if(remoteReviews.isLoading || !remoteReviews.data) {
-      return;
-    }
-  }, [remoteReviews]);
 
   if(!showData || !remoteReviews.data?.reviews) {
     return;

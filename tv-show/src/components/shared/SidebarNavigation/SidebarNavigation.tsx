@@ -5,6 +5,7 @@ import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { Button, VStack, Heading, Show, Flex, Drawer, useDisclosure, DrawerOverlay, DrawerContent, IconButton, Text, Stack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export function isNavigationShown(path: string) {
   const noSidebarPaths = [
@@ -45,6 +46,7 @@ interface ISidenavProps {
 }
 
 function DekstopSidebarNav({title, onLogoutClick}: ISidenavProps) {
+  const [clicked, setClicked] = useState(false);
   return (
     <VStack h='100vh' maxWidth={"md"} justifyContent='space-between' position='sticky' top='0px' alignItems="start" className="desktop-sidebarnav">
       <VStack gap={2} alignItems="start">
@@ -53,7 +55,7 @@ function DekstopSidebarNav({title, onLogoutClick}: ISidenavProps) {
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
         <ButtonLinkWithSelectHighlight text='My Profile' />
       </VStack>
-      <Button variant='outline' onClick={onLogoutClick}>Log out</Button>
+      <Button isLoading={clicked} variant='outline' onClick={() => { onLogoutClick(); setClicked(true);}}>Log out</Button>
 
     </VStack>
   );
@@ -78,7 +80,7 @@ function MobileSidebarNav({title, onLogoutClick}: ISidenavProps) {
               <Link onClick={onClose} href="/top-rated">Top rated</Link>
               <Link onClick={onClose} href="/profile">My profile</Link>
             </Stack>
-            <Button variant="outline" onClick={onLogoutClick}>Log out</Button>
+            <Button isDisabled={true} variant="outline" onClick={onLogoutClick}>Log out</Button>
           </Flex>
         </DrawerContent>
       </Drawer>

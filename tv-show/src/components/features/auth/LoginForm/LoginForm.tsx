@@ -56,7 +56,7 @@ function LoginFormInner() {
   return (
       <Flex direction="column" justifyContent="center" h="100%">
         <Heading marginBottom={8} as="h2" textAlign="center">TV Show App</Heading>
-        <Flex as="form" direction="column" gap={3} onSubmit={handleSubmit(onLogin)}>
+        <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onLogin)}>
           <FormControl isRequired isDisabled={isMutating}>
             <FormLabel color="white">Email</FormLabel>
             <Input {...register('email')} required type="email" />

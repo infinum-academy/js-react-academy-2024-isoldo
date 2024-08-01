@@ -12,7 +12,7 @@ interface IShowReviewSectionProps {
 
 export default function ShowReviewSection({reviews, onSubmit, user}: IShowReviewSectionProps) {
   return (
-    <Flex bg="darkPurple" id="review-section">
+    <Flex id="review-section">
       <Flex justifyContent="space-between" flexGrow={1} id="review-section-inner" flexWrap="wrap">
         <Heading size='md' marginRight={10}>Reviews</Heading>
           <Flex flexGrow={1} id="review-section-reviews">

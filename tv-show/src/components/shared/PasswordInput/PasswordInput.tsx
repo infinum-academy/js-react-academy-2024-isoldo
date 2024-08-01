@@ -13,7 +13,7 @@ export const PasswordInput = forwardRef(({ showOption, ...inputProps }: IPasswor
 
   return (
     <InputGroup>
-      <InputLeftElement><LockIcon color="white"/></InputLeftElement>
+      <InputLeftElement><LockIcon /></InputLeftElement>
       <Input ref={ref} type={show ? 'text' : 'password'} {...inputProps}/>
       {
         showOption &&

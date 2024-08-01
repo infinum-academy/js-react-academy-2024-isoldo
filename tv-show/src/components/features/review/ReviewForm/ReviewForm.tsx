@@ -25,7 +25,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
   const isDataIncomplete = !rating || !comment;
 
   return(
-    <Flex bg="darkPurple" direction="column" marginBottom={4} gap={3} flexGrow={1} id="review-form">
+    <Flex direction="column" marginBottom={4} gap={3} flexGrow={1} id="review-form">
       <form onSubmit={handleSubmit(onRate)}>
           <Textarea
             borderRadius="26px"

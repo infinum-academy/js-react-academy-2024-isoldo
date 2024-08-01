@@ -60,7 +60,7 @@ export default function ShowContainer({showData}: IShowContainerProps) {
 
   return (
     <Flex justifyContent="center">
-      <Flex bg="darkPurple" direction="column" justifyContent="center" id="details-and-review">
+      <Flex direction="column" justifyContent="center" id="details-and-review">
         <ShowDetails show={showData} averageRating={showData.average_rating} />
         <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
       </Flex>

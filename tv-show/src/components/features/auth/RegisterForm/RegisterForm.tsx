@@ -73,7 +73,7 @@ function RegisterFormInner() {
   return (
     <Flex direction="column" justifyContent="center" h="100%">
       <Heading as="h2" textAlign="center" marginBottom={8}>TV Shows App</Heading>
-      <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onRegister)}>
+      <Flex as="form" width="100%" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onRegister)}>
         <FormControl isRequired={true} isDisabled={isMutating}>
           <FormLabel>Email</FormLabel>
           <Input {...register('email')} required type="email" />

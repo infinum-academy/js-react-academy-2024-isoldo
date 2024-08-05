@@ -80,7 +80,7 @@ function MobileSidebarNav({title, onLogoutClick}: ISidenavProps) {
               <Link onClick={onClose} href="/top-rated">Top rated</Link>
               <Link onClick={onClose} href="/profile">My profile</Link>
             </Stack>
-            <Button isDisabled={true} variant="outline" onClick={onLogoutClick}>Log out</Button>
+            <Button variant="outline" onClick={onLogoutClick}>Log out</Button>
           </Flex>
         </DrawerContent>
       </Drawer>

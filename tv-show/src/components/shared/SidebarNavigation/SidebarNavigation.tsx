@@ -41,7 +41,7 @@ function DekstopSidebarNav({title, onLogoutClick}: ISidenavProps) {
   return (
     <VStack h='100vh' maxWidth={"md"} justifyContent='space-between' position='sticky' top='0px' alignItems="start" className="desktop-sidebarnav">
       <VStack gap={2} alignItems="start">
-        <Heading color="white"  margin={4}>{title}</Heading>
+        <Heading margin={4}>{title}</Heading>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
         <ButtonLinkWithSelectHighlight text='My Profile' />

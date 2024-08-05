@@ -65,7 +65,7 @@ function MobileSidebarNav({title, onLogoutClick}: ISidenavProps) {
   const {isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex padding={3} justifyContent="space-between">
+    <Flex padding={3} justifyContent="space-between" position="sticky" zIndex={999} top={0} bg="darkPurple">
       <Heading>{title}</Heading>
       <IconButton variant="outline" icon={<HamburgerIcon />} onClick={onOpen} aria-label="open-menu-button" />
       <Drawer isOpen={isOpen} onClose={onClose}>

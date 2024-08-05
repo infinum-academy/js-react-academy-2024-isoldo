@@ -1,7 +1,7 @@
+import { CenteredSpinner } from "@/components/shared/CenteredSpinner/CenteredSpinner";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import ShowsList from "@/components/shared/ShowsList/ShowsList";
 import { getShowsDetails, getTopRatedShowsDetails, IShowsResponse } from "@/fetchers/shows";
-import { Container, Flex, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 
 type ShowsType = 'all' | 'top';
@@ -23,9 +23,7 @@ export default function ShowsContainer({type}: IShowsContainerProps) {
 
   if(isLoading) {
     return (
-      <Flex justifyContent='center'>
-        <Spinner size='xl'/>
-      </Flex>
+      <CenteredSpinner />
     );
   }
 

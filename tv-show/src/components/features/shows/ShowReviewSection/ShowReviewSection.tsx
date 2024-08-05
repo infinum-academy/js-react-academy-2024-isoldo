@@ -6,18 +6,18 @@ import { IUser } from "@/typings/User.type";
 
 interface IShowReviewSectionProps {
   reviews: IReview[];
-  onSubmit: (newReview: INewReview) => void;
   user: IUser;
+  showId: string;
 }
 
-export default function ShowReviewSection({reviews, onSubmit, user}: IShowReviewSectionProps) {
+export default function ShowReviewSection({reviews, user, showId}: IShowReviewSectionProps) {
   return (
-    <Flex bg="darkPurple" id="review-section">
+    <Flex id="review-section">
       <Flex justifyContent="space-between" flexGrow={1} id="review-section-inner" flexWrap="wrap">
         <Heading size='md' marginRight={10}>Reviews</Heading>
           <Flex flexGrow={1} id="review-section-reviews">
             <Flex direction="column" flexGrow={1} id="review-section-reviews-inner">
-              <ReviewForm onSubmit={onSubmit} user={user}/>
+              <ReviewForm showId={showId} />
               <ReviewList reviews={reviews} user={user}/>
             </Flex>
           </Flex>

@@ -18,7 +18,7 @@ export default function RatingInput({label, onChange, value}: IRatingProps) {
 
   return (
     <Flex justifyContent="center" alignItems="baseline" className="rating-input">
-      <Flex bg="darkPurple" justifyContent="space-between" className="rating-input-elements">
+      <Flex justifyContent="space-between" className="rating-input-elements">
         <Text>{label}</Text>
         <Flex justifyContent="flex-start">
         {

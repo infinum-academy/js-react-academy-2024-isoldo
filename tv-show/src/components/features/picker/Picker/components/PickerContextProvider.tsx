@@ -28,7 +28,7 @@ interface IPickerContextProviderProps {
 export function PickerContextProvider({ stepCount, children }: IPickerContextProviderProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedShows, setSelectedShows] = useState<IShow[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data } = useSWR<{shows:IShow[]}>(swrKeys.all_shows(currentStep+1, 4), authGet);
 
   const isFinalStep = (curr: number) => curr === (stepCount-1);

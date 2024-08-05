@@ -53,7 +53,7 @@ function DekstopSidebarNav({title, onLogoutClick}: ISidenavProps) {
         <Heading margin={4}>{title}</Heading>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
-        <ButtonLinkWithSelectHighlight text='My Profile' />
+        <ButtonLinkWithSelectHighlight text='My Profile' href='/profile' />
       </VStack>
       <Button isLoading={clicked} variant='outline' onClick={() => { onLogoutClick(); setClicked(true);}}>Log out</Button>
 

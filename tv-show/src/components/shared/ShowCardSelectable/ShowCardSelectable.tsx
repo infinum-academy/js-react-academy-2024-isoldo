@@ -9,14 +9,22 @@ interface IShowCardSelectableProps {
 
 export default function ShowCardSelectable({show, onClick, isSelected=false}: IShowCardSelectableProps) {
   const {image_url, title} = show;
+
+  const onShowClick = () => {
+    onClick(show);
+  }
+
+  const background = isSelected ? "lightPurple" : "white";
+  const textColor = isSelected ? "white" : "purple"
+
   return (
-    <Card>
-      <CardBody onClick={() => onClick(show)} background={isSelected ? "green" : "white"} minW="100px">
+    <Card boxShadow="none">
+      <CardBody onClick={onShowClick} background={background} minW="100px">
         <Flex flexDir='column'>
           <Show above="sm">
             <Image src={image_url} objectFit='cover' boxSize='200px'/>
           </Show>
-          <Text>{title}</Text>
+          <Text color={textColor}>{title}</Text>
         </Flex>
       </CardBody>
     </Card>

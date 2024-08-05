@@ -10,12 +10,11 @@ function getAverageRatingText(averageRating: number | undefined) {
 
 interface IShowDetailsProps {
   show: IShow;
-  averageRating: number | undefined;
 }
 
-export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
+export default function ShowDetails({show}: IShowDetailsProps) {
   const {title, description, image_url} = show;
-  const averageRatingText = getAverageRatingText(averageRating);
+  const averageRatingText = getAverageRatingText(show.average_rating);
 
   return (
     <Flex id="show-details">

@@ -2,20 +2,28 @@
 
 import { Button, Flex, Textarea } from "@chakra-ui/react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
-import { INewReview } from "@/typings/Review.type";
-import { IUser } from "@/typings/User.type";
+import { INewReview, IReview } from "@/typings/Review.type";
 import { Controller, useForm } from "react-hook-form";
+import { authPost } from "@/fetchers/fetcher";
+import { swrKeys } from "@/fetchers/swrKeys";
+import useSWRMutation from "swr/mutation";
+import { useReviews } from "@/hooks/useReviews";
 
 interface IReviewFormProps {
-  onSubmit: (newReview: INewReview) => void;
-  user: IUser;
+  showId: string;
 }
 
-export default function ReviewForm({onSubmit}: IReviewFormProps) {
+export default function ReviewForm({showId}: IReviewFormProps) {
   const {register, handleSubmit, control, setValue, formState: {isSubmitting}, watch} = useForm<INewReview>();
+  const remoteReviews = useReviews(showId);
+  const { trigger } = useSWRMutation(swrKeys.reviews(), authPost<IReview>, {
+    onSuccess: ((data) => {
+      remoteReviews.mutate();
+    })
+  });
 
-  const onRate = (data: INewReview) => {
-    onSubmit(data);
+  const onRate = async (data: INewReview) => {
+    await trigger({...data, show_id: showId});
     setValue("rating", 0);
     setValue("comment", "");
   };
@@ -46,7 +54,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
                   value={value}
                 />
               )} />
-            <Button isDisabled={isDataIncomplete || isSubmitting} type="submit">Post</Button>
+            <Button isLoading={isSubmitting} isDisabled={isDataIncomplete} type="submit">Post</Button>
           </Flex>
       </form>
     </Flex>

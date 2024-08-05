@@ -5,21 +5,12 @@ import ShowReviewSection from "../ShowReviewSection/ShowReviewSection";
 import { IShow } from "@/typings/Show.type";
 import ShowDetails from "../ShowDetails/ShowDetails";
 import { swrKeys } from "@/fetchers/swrKeys";
-import useSWR, { SWRResponse } from "swr";
 import { INewReview, IReview } from "@/typings/Review.type";
 import useSWRMutation from "swr/mutation";
-import { authGet, authPost } from "@/fetchers/fetcher";
+import { authPost } from "@/fetchers/fetcher";
 import { useUser } from "@/hooks/useUser";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
-
-interface IReviews {
-  reviews: IReview[];
-  meta: any;
-}
-
-function useReviews(id: string):SWRResponse<IReviews, any> {
-  return useSWR(swrKeys.showReviews(Number(id)), authGet<IReviews>);
-}
+import { useReviews } from "@/hooks/useReviews";
 
 interface IShowContainerProps {
   showData: IShow;
@@ -61,8 +52,8 @@ export default function ShowContainer({showData}: IShowContainerProps) {
   return (
     <Flex justifyContent="center">
       <Flex direction="column" justifyContent="center" id="details-and-review">
-        <ShowDetails show={showData} averageRating={showData.average_rating} />
-        <ShowReviewSection reviews={remoteReviews.data.reviews} onSubmit={onSubmit} user={user.data.user} />
+        <ShowDetails show={showData} />
+        <ShowReviewSection showId={showData.id} reviews={remoteReviews.data.reviews} user={user.data.user} />
       </Flex>
     </Flex>
   )

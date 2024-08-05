@@ -35,7 +35,7 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
             color="darkPurple"
             {...register("comment")}
           />
-          <Flex justifyContent='space-between' alignItems="baseline" flexGrow={1} className="review-form-rating-row">
+          <Flex marginTop={3} justifyContent='space-between' alignItems="baseline" flexGrow={1} className="review-form-rating-row">
           <Controller
               control={control}
               name="rating"

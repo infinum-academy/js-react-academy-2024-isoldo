@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import RatingIcon from "../RatingIcon/RatingIcon";
 
@@ -17,21 +17,26 @@ export default function RatingInput({label, onChange, value}: IRatingProps) {
   useEffect(() => setHoverRating(value), [value, setHoverRating]);
 
   return (
-    <Container>
-      {
-        [...Array(maxRating)].map((currentRating, index) => {
-          return (
-            <RatingIcon
-              key={index}
-              index={index+1}
-              hoverRating={hoverRating}
-              onMouseEnter={(index: number) => setHoverRating(index)}
-              onMouseLeave={() => setHoverRating(value)}
-              onClick={(index: number) => onChange(index)}
-            />
-          )
-        })
-      }
-    </Container>
+    <Flex justifyContent="center" alignItems="baseline" className="rating-input">
+      <Flex bg="darkPurple" justifyContent="space-between" className="rating-input-elements">
+        <Text>{label}</Text>
+        <Flex justifyContent="flex-start">
+        {
+          [...Array(maxRating)].map((currentRating, index) => {
+            return (
+              <RatingIcon
+                key={index}
+                index={index+1}
+                hoverRating={hoverRating}
+                onMouseEnter={(index: number) => setHoverRating(index)}
+                onMouseLeave={() => setHoverRating(value)}
+                onClick={(index: number) => onChange(index)}
+              />
+            )
+          })
+        }
+        </Flex>
+      </Flex>
+    </Flex>
   )
 }

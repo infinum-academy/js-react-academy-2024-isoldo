@@ -1,7 +1,10 @@
+'use client';
+
 import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { Button, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
+import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Show, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
@@ -12,6 +15,23 @@ interface ILoginFormInputs {
 }
 
 export default function LoginForm() {
+  return (
+    <>
+    <Show above="md">
+      <DesktopLoginWrapper>
+        <LoginFormInner />
+      </DesktopLoginWrapper>
+    </Show>
+    <Show below="md">
+      <MobileLoginWrapper>
+        <LoginFormInner />
+      </MobileLoginWrapper>
+    </Show>
+  </>
+  )
+}
+
+function LoginFormInner() {
   const { register, handleSubmit } = useForm<ILoginFormInputs>();
   const { mutate } = useSWR(swrKeys.user(), universalFetcher);
   const { trigger } = useSWRMutation(swrKeys.login(), loginPost, {
@@ -26,23 +46,42 @@ export default function LoginForm() {
   };
 
   return (
-    <Flex direction='row' justifyContent="center" alignItems="center" marginTop={10}>
-      <Flex direction='column' gap={3} alignItems="center" maxWidth="640px">
-        <Heading as="h2">Login</Heading>
-        <Text>Log in using your credentials</Text>
-        <Flex as="form" width="100%" display="flex" flexDirection="column" alignItems="center" gap={3} onSubmit={handleSubmit(onLogin)}>
-          <FormControl isRequired={true}>
-            <FormLabel>Email</FormLabel>
+      <Flex direction="column" justifyContent="center" h="100%">
+        <Heading marginBottom={8} as="h2" textAlign="center">TV Show App</Heading>
+        <Flex as="form" direction="column" gap={3} onSubmit={handleSubmit(onLogin)}>
+          <FormControl isRequired>
+            <FormLabel color="white">Email</FormLabel>
             <Input {...register('email')} required type="email" />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
+            <FormLabel color="white">Password</FormLabel>
             <Input {...register('password')} required type="password" />
           </FormControl>
-          <Button type="submit">Login</Button>
-          <Text>Not a user? <Link href="/register">Register here</Link></Text>
+          <Container centerContent>
+            <Button width="fit-content" type="submit">Login</Button>
+          </Container>
+          <Text color="white">Don't have an account? <Link href="/register"><b>Register</b></Link></Text>
         </Flex>
       </Flex>
+  )
+}
+
+function DesktopLoginWrapper({children}: {children: ReactNode}) {
+  return (
+    <Modal isCentered isOpen={true} onClose={() => null}>
+      <ModalContent bg="darkPurple">
+        <Container centerContent w="500px" h="500px">
+          {children}
+        </Container>
+      </ModalContent>
+    </Modal>
+  )
+}
+
+function MobileLoginWrapper({children}: {children: ReactNode}) {
+  return (
+    <Flex bg="purple" h="100vh" justifyContent="center">
+      {children}
     </Flex>
   )
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
   router.push('/all-shows');
 
   return (
-    <main className={styles.main}>
+    <main>
     </main>
   );
 }

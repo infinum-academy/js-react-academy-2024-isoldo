@@ -12,11 +12,10 @@ interface IRatingIconProps {
 export default function RatingIcon({index, hoverRating, onMouseEnter, onMouseLeave, onClick}: IRatingIconProps) {
   return (
     <IconButton
-      isRound
-      colorScheme='yellow'
+      size="sm"
       aria-label={'rating-'+index}
       icon={<StarIcon />}
-      variant={(hoverRating >= index) ? 'solid' : 'outline'}
+      variant={(hoverRating >= index) ? 'ratingSelected' : 'rating'}
       onMouseEnter={() => {onMouseEnter(index)}}
       onMouseLeave={onMouseLeave}
       onClick={() => onClick(index)}

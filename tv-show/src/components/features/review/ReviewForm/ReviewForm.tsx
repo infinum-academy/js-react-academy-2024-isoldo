@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Card, CardBody, Container, Flex, Textarea } from "@chakra-ui/react";
+import { Button, Flex, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import RatingInput from "../../rating/RatingInput/RatingInput";
 import { INewReview } from "@/typings/Review.type";
@@ -16,27 +16,27 @@ export default function ReviewForm({onSubmit}: IReviewFormProps) {
   const [rating, setRating] = useState(0);
 
   return(
-    <Container marginBottom={4}>
-      <Card>
-        <CardBody>
-          <Textarea
-            placeholder='What did you think of the show?'
-            onBlur={(e) => setComment(e.target.value)}
-          />
-          <RatingInput label='rating-label' onChange={(n: number) => setRating(n)} value={rating}/>
-          <Flex justifyContent='flex-end'>
-            <Button onClick={() => {
-              const newReview: INewReview = {
-                comment,
-                rating,
-              };
-              setRating(0);
-              setComment('');
-              onSubmit(newReview);
-            }}>Submit review</Button>
-          </Flex>
-        </CardBody>
-      </Card>
-    </Container>
+    <Flex bg="darkPurple" direction="column" marginBottom={4} gap={3} flexGrow={1} id="review-form">
+      <Textarea
+        borderRadius="26px"
+        bg="white"
+        _placeholder={{color: "lightPurple", opacity: 1}}
+        placeholder='Enter review'
+        color="darkPurple"
+        onBlur={(e) => setComment(e.target.value)}
+      />
+      <Flex justifyContent='space-between' alignItems="baseline" flexGrow={1} className="review-form-rating-row">
+        <RatingInput label='Rating' onChange={(n: number) => setRating(n)} value={rating}/>
+        <Button onClick={() => {
+          const newReview: INewReview = {
+            comment,
+            rating,
+          };
+          setRating(0);
+          setComment('');
+          onSubmit(newReview);
+          }}>Post</Button>
+      </Flex>
+    </Flex>
   )
 }

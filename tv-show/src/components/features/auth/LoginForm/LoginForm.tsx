@@ -2,7 +2,7 @@
 
 import { loginPost, universalFetcher } from "@/fetchers/fetcher";
 import { swrKeys } from "@/fetchers/swrKeys";
-import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Show, Spinner, Text } from "@chakra-ui/react";
+import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalContent, Show, Text } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
 import Link from "next/link";
 import { ReactNode, useState } from "react";

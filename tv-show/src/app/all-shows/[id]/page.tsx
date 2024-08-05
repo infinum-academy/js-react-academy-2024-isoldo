@@ -1,9 +1,9 @@
 'use client';
 
 import ShowContainer from "@/components/features/shows/ShowContainer/ShowContainer";
+import { CenteredSpinner } from "@/components/shared/CenteredSpinner/CenteredSpinner";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import { getShowDetails } from "@/fetchers/shows";
-import { Flex, Spinner } from "@chakra-ui/react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -21,9 +21,7 @@ export default function ShowDetailsPage() {
   // (!data) here to calm the linter down - data will be defined is both error and isLoading are nullish
   if(isLoading || !data) {
     return (
-      <Flex justifyContent='center'>
-        <Spinner size='xl'/>
-      </Flex>
+      <CenteredSpinner />
     );
   }
 

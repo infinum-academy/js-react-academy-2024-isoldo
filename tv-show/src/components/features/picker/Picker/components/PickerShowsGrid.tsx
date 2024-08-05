@@ -1,17 +1,16 @@
 import { useContext } from "react";
 import { PickerContext } from "./PickerContextProvider";
-import { Flex, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Flex, SimpleGrid } from "@chakra-ui/react";
 import ShowCardSelectable from "@/components/shared/ShowCardSelectable/ShowCardSelectable";
 import { IShow } from "@/typings/Show.type";
+import { CenteredSpinner } from "@/components/shared/CenteredSpinner/CenteredSpinner";
 
 export function PickerShowsGrid() {
   const ctx = useContext(PickerContext);
 
   if(!ctx.shows) {
     return (
-      <Flex justifyContent='center'>
-        <Spinner size='xl'/>
-      </Flex>
+      <CenteredSpinner />
     )
   }
 

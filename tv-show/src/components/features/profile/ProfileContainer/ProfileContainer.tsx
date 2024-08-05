@@ -26,8 +26,8 @@ export function ProfileContainer() {
   }
 
   return (
-    <Flex h="100vh" direction="column" justifyContent='center' className="spinner-out">
-      <Flex justifyContent="center" className="spinner-in">
+    <Flex h="100vh" direction="column" justifyContent='center' className="profile-out">
+      <Flex justifyContent="center" className="profile-in">
         <Flex direction="column" gap={8}>
           <Profile user={user.data.user} />
           <PickerContextProvider stepCount={4}>

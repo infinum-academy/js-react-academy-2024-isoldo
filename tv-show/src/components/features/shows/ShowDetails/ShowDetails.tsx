@@ -25,11 +25,11 @@ export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
         </CardHeader>
 
         <CardBody color="purple">
-          <Heading size='md' color="purple">
+          <Heading variant="content" size="md">
             {title}
           </Heading>
           <Stack divider={<StackDivider />} spacing={4} marginBottom={2}>
-            <Box >
+            <Box>
               {description}
             </Box>
             <Box>

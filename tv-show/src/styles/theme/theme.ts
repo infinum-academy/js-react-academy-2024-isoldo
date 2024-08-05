@@ -6,6 +6,7 @@ import radii from "./foundations/radii";
 import Card from "./components/cards";
 import Input from "./components/inputs";
 import Container from "./components/containers";
+import Heading from "./components/headings";
 
 const colors = {
   white: "#ffffff",
@@ -32,7 +33,8 @@ const theme = extendTheme({
     Button,
     Card,
     Input,
-    Container
+    Container,
+    Heading
   },
   colors,
   fonts,

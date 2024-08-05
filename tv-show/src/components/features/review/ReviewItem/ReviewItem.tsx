@@ -25,7 +25,7 @@ export default function ReviewItem({ review, user }: IReviewItemProps) {
   return (
     <Flex bg="purple" borderRadius="26px" flexGrow={1} className="review-item">
         <Flex alignItems={'center'} margin={2} className="review-item-avatar">
-          <Image src={commentUser.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
+          <Image borderRadius="full" src={commentUser.image_url} fallbackSrc="https://fakeimg.pl/60x60/353b38/e85115?text=JD" marginRight={4}/>
         </Flex>
         <Flex width="30%" direction="column" marginRight={3} justifyContent="center" className="review-item-user-and-rating">
           <Text overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis"><b>{commentUser.email}</b></Text>

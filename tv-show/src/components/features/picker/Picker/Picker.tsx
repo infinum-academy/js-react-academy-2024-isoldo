@@ -20,7 +20,7 @@ export function Picker() {
     <Modal isOpen={ctx.isModalOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent bg="purple">
-          <ModalHeader>Picker</ModalHeader>
+          <ModalHeader>Watchlist Generator</ModalHeader>
           <ModalBody>
             <PickerShowsGrid/>
           </ModalBody>

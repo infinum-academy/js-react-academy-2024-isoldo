@@ -1,5 +1,5 @@
 import { IShow } from "@/typings/Show.type";
-import { Button, Card, CardBody, Flex, Image, Show, Text } from "@chakra-ui/react";
+import { Card, CardBody, Flex, Image, Show, Text } from "@chakra-ui/react";
 
 interface IShowCardSelectableProps {
   show: IShow;

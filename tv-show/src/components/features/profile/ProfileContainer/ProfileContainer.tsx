@@ -3,8 +3,7 @@
 import { CenteredSpinner } from "@/components/shared/CenteredSpinner/CenteredSpinner";
 import ErrorBox from "@/components/shared/ErrorBox/ErrorBox";
 import { useUser } from "@/hooks/useUser";
-import { Flex, Text, Image, Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { Flex } from "@chakra-ui/react";
 import { Profile } from "../Profile/Profile";
 import { PickerContextProvider } from "../../picker/Picker/components/PickerContextProvider";
 import { Picker } from "../../picker/Picker/Picker";

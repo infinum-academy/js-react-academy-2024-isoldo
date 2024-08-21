@@ -1,20 +1,13 @@
 'use client';
 
-import { useUser } from "@/hooks/useUser";
 import { IUser } from "@/typings/User.type";
 import { Flex, Text, Image, Button } from "@chakra-ui/react";
-import { useState } from "react";
 
 interface IProfileProps {
   user: IUser;
 }
 
 export function Profile({user}: IProfileProps) {
-  const [error, setError] = useState("");
-
-  const onUploadClick = () => {
-    setError("Currently unsupported");
-  }
 
   return (
     <Flex direction="column" justifyContent="center" textAlign="center" gap={8}>

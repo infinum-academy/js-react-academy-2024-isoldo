@@ -1,4 +1,4 @@
-import { INewReview, IReview } from "@/typings/Review.type";
+import { IReview } from "@/typings/Review.type";
 import { Flex, Heading } from "@chakra-ui/react";
 import ReviewList from "../../review/ReviewList/ReviewList";
 import ReviewForm from "../../review/ReviewForm/ReviewForm";

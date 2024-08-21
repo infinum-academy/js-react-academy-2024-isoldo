@@ -1,4 +1,4 @@
-import { defineStyleConfig, StyleFunctionProps } from "@chakra-ui/react";
+import { defineStyleConfig } from "@chakra-ui/react";
 
 const Card = defineStyleConfig({
   baseStyle: {

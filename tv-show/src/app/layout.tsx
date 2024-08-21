@@ -36,7 +36,7 @@ export default function RootLayout({
 
 function DesktopLayout({children}: {children: React.ReactNode}) {
   return (
-    <Flex bg="darkPurple">
+    <Flex>
       <SidebarNavigation />
       <Box flex='1' flexDir='row' minHeight="100vh">
         {children}
@@ -47,7 +47,7 @@ function DesktopLayout({children}: {children: React.ReactNode}) {
 
 function MobileLayout({children}: {children: React.ReactNode}) {
   return (
-    <Flex bg="darkPurple" direction="column">
+    <Flex direction="column">
       <SidebarNavigation />
       <Box flex='1' flexDir='row' minHeight="100vh">
         {children}

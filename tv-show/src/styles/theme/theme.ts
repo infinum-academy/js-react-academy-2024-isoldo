@@ -7,6 +7,7 @@ import Card from "./components/cards";
 import Input from "./components/inputs";
 import Container from "./components/containers";
 import Heading from "./components/headings";
+import Progress from "./components/progress";
 
 const colors = {
   white: "#ffffff",
@@ -25,7 +26,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        color: "white"
+        color: "white",
+        bg: "darkPurple"
       }
     }
   },
@@ -34,7 +36,8 @@ const theme = extendTheme({
     Card,
     Input,
     Container,
-    Heading
+    Heading,
+    Progress
   },
   colors,
   fonts,

@@ -1,11 +1,19 @@
 'use client';
 
-import { isNavigationShown } from "@/components/features/auth/AuthRedirectContainer/AuthRedirectContainer";
 import { useUser } from "@/hooks/useUser";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { Button, VStack, Heading, Show, Flex, Drawer, useDisclosure, DrawerOverlay, DrawerContent, IconButton, Text, Stack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+export function isNavigationShown(path: string) {
+  const noSidebarPaths = [
+    "/login",
+    "/register"
+  ]
+  return !noSidebarPaths.includes(path);
+}
 
 export default function SidebarNavigation() {
   const path = usePathname();
@@ -38,15 +46,16 @@ interface ISidenavProps {
 }
 
 function DekstopSidebarNav({title, onLogoutClick}: ISidenavProps) {
+  const [clicked, setClicked] = useState(false);
   return (
     <VStack h='100vh' maxWidth={"md"} justifyContent='space-between' position='sticky' top='0px' alignItems="start" className="desktop-sidebarnav">
       <VStack gap={2} alignItems="start">
         <Heading margin={4}>{title}</Heading>
         <ButtonLinkWithSelectHighlight text='All shows' href='/all-shows' />
         <ButtonLinkWithSelectHighlight text='Top rated' href='/top-rated' />
-        <ButtonLinkWithSelectHighlight text='My Profile' />
+        <ButtonLinkWithSelectHighlight text='My Profile' href='/profile' />
       </VStack>
-      <Button variant='outline' onClick={onLogoutClick}>Log out</Button>
+      <Button isLoading={clicked} variant='outline' onClick={() => { onLogoutClick(); setClicked(true);}}>Log out</Button>
 
     </VStack>
   );
@@ -56,7 +65,7 @@ function MobileSidebarNav({title, onLogoutClick}: ISidenavProps) {
   const {isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex padding={3} justifyContent="space-between">
+    <Flex padding={3} justifyContent="space-between" position="sticky" zIndex={999} top={0} bg="darkPurple">
       <Heading>{title}</Heading>
       <IconButton variant="outline" icon={<HamburgerIcon />} onClick={onOpen} aria-label="open-menu-button" />
       <Drawer isOpen={isOpen} onClose={onClose}>

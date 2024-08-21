@@ -10,15 +10,14 @@ function getAverageRatingText(averageRating: number | undefined) {
 
 interface IShowDetailsProps {
   show: IShow;
-  averageRating: number | undefined;
 }
 
-export default function ShowDetails({show, averageRating}: IShowDetailsProps) {
+export default function ShowDetails({show}: IShowDetailsProps) {
   const {title, description, image_url} = show;
-  const averageRatingText = getAverageRatingText(averageRating);
+  const averageRatingText = getAverageRatingText(show.average_rating);
 
   return (
-    <Flex bg="darkPurple" id="show-details">
+    <Flex id="show-details">
       <Card marginBottom={8} borderRadius="26px">
         <CardHeader padding="0">
           <Image borderTopRadius="26px" maxHeight="400px" width="100%" fit="cover" src={image_url} fallbackSrc='https://fakeimg.pl/600x400/353b38/e85115?text=TV+Show' pb={4}/>

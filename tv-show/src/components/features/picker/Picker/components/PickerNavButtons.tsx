@@ -11,6 +11,7 @@ export function PickerNavButtons({onClose}: IPickerNavButtonsProps) {
 
   const isPrevDisabled = ctx.currentStep === 0;
   const isNextStepFinal = ctx.isFinalStep(ctx.currentStep + 1);
+  const nextButtonVariant = isNextStepFinal ? "solid" : "outline"
 
   const onPrevClick = () => {
     ctx.setCurrentStep(ctx.currentStep-1);
@@ -27,7 +28,7 @@ export function PickerNavButtons({onClose}: IPickerNavButtonsProps) {
         <Button onClick={onClose}>Close</Button> ||
           <>
           <Button variant="outline" isDisabled={isPrevDisabled} onClick={onPrevClick}>Previous</Button>
-          <Button variant="outline" onClick={onNextClick}>{isNextStepFinal ? "Generate watchlist" : "Next"}</Button>
+          <Button variant={nextButtonVariant} onClick={onNextClick}>{isNextStepFinal ? "Generate watchlist" : "Next"}</Button>
           </>
       }
     </Flex>

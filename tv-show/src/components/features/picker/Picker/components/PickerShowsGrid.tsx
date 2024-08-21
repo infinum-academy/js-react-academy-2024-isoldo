@@ -21,7 +21,7 @@ export function PickerShowsGrid() {
     if(!isSelected) {
       ctx.setSelectedShows([...ctx.selectedShows, show]);
     } else {
-      ctx.setSelectedShows(ctx.selectedShows.filter((s) => s!==show))
+      ctx.setSelectedShows(ctx.selectedShows.filter((s) => s.id!==show.id))
     }
   }
 
@@ -32,7 +32,6 @@ export function PickerShowsGrid() {
       <SimpleGrid columns={2} gap={3}>
       {shows.map((show) => {
         const isSelected = !!(ctx.selectedShows.find((s) => s.id === show.id));
-        console.log({id: show.id, isSelected, show, ss: ctx.selectedShows})
         return (
           <>
             {!isFinalStep &&
